@@ -1,0 +1,40 @@
+.main-title{
+    font-size: 95px;
+  }
+  
+.span{
+    font-family: 'EB Garamond';
+  }
+
+  ion-toolbar {
+    --background:white;
+  }
+  
+  ion-content {
+    --background: #ccc url("../../assets/img/back-school.jpg") no-repeat center center / cover;
+  }
+
+  .my-width{
+  width:300px;
+}
+
+.h1-black {
+    color: black;
+  }
+
+.div-border{
+    border:1px black;
+    box-shadow: 0 12px 12px 0 rgba(10, 120, 148, 0.55);
+    background-color:white;
+  }
+
+  .btn {
+    border-radius: 50%;
+    
+  }
+
+  .responsive {
+    max-width: 100%;
+    max-width: 100px;
+    height: auto;
+  }
