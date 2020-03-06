@@ -1,12 +1,43 @@
 <ion-header>
 
   <ion-toolbar>
-    <ion-title align="center" color="secondary"  class="main-title span" >PIA</ion-title>
+    <ion-title align="center" color="secondary" class="main-title1 span" >PIA</ion-title>
   </ion-toolbar>
   
 </ion-header>
 
 <ion-content>
+
+  <div class="ion-padding-top ion-padding-bottom">
+  </div>
+
+  <div class="ion-padding-top ion-padding-bottom">
+  </div>
+
+  <ion-row class="ion-justify-content-evenly" >
+
+    <ion-col size-lg="4"> 
+      <ion-card class="div-border pro-tip-color" style="border-radius: 10px;" >
+      
+        <ion-card-content>
+          <p class=" h1-black regular-text span" style=" font-weight:bold;">
+          Please think your answers carefully, once you move to the next page your answer will be stored permanently in our database.          </p>
+        </ion-card-content>
+      </ion-card>
+  </ion-col>
+
+  <ion-col size-lg="4"> 
+    <ion-card class="div-border pro-tip-color" style="border-radius: 10px;">
+    
+      <ion-card-content>
+        <p class=" h1-black regular-text" style=" font-weight:bold;">
+          We recommend you to answer every question, this will allow us to provide a better more precise result for you.
+        </p>
+      </ion-card-content>
+    </ion-card>
+</ion-col>
+
+  </ion-row>
 
   <div class="ion-padding-top ion-padding-bottom">
   </div>
@@ -91,11 +122,7 @@
   <div class="ion-padding-top ion-padding-bottom">
   </div>
 
-  <div class="ion-padding-top ion-padding-bottom">
-  </div>
 
-  <div class="ion-padding-top ion-padding-bottom">
-  </div> 
    
 <ion-grid fixed>
 
@@ -104,28 +131,28 @@
   <ion-col size-lg="2" class="ion-margin"> 
     <button class="btn responsive" >
       <img src="../../assets/img/strongly-agree.png" />
-      <p>Strongly agree</p>
+      <p class="span">Strongly agree</p>
    </button>
   </ion-col>
 
   <ion-col size-lg="2" class="ion-margin">
     <button class="btn responsive" >
-      <img src="../../assets/img/strongly-agree.png"  />
-      <p>Strongly agree</p>
+      <img src="../../assets/img/agree.png"  />
+      <p class="span">Agree</p>
    </button>
   </ion-col>
 
   <ion-col size-lg="2" class="ion-margin">
     <button class="btn responsive" >
-      <img src="../../assets/img/strongly-agree.png"  />
-      <p>Strongly agree</p>
+      <img src="../../assets/img/disagree.png"  />
+      <p class="span">Disagree</p>
    </button>
   </ion-col>
   
-  <ion-col size-lg="2" class="ion-margin">
+  <ion-col size-lg="1" class="ion-margin">
     <button class="btn responsive" >
-      <img src="../../assets/img/strongly-agree.png"  />
-      <p>Strongly agree</p>
+      <img src="../../assets/img/strongly-disagree.png"  />
+      <p class="span">Strongly disagree</p>
    </button>
   </ion-col>
 
@@ -133,5 +160,19 @@
 </ion-row>
 
 </ion-grid>
+
+<ion-row class="ion-justify-content-center">
+  <ion-col size="8">
+
+<div class="ion-padding-bottom" >
+
+<ion-progress-bar color="secondary"  value="0.7" class="progress-bar"></ion-progress-bar>
+
+</div>
+
+<div class="ion-padding-bottom"></div>
+
+</ion-col>
+</ion-row>
 
 </ion-content>

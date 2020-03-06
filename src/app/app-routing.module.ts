@@ -8,6 +8,18 @@ const routes: Routes = [
     path: 'pia-items',
     loadChildren: () => import('./pia-items/pia-items.module').then( m => m.PiaItemsPageModule)
   },
+  {
+    path: 'pia-about-us',
+    loadChildren: () => import('./pia-about-us/pia-about-us.module').then( m => m.PiaAboutUsPageModule)
+  },
+  {
+    path: 'pia-careers',
+    loadChildren: () => import('./pia-careers/pia-careers.module').then( m => m.PiaCareersPageModule)
+  },
+  {
+    path: 'pia-pre-result',
+    loadChildren: () => import('./pia-pre-result/pia-pre-result.module').then( m => m.PiaPreResultPageModule)
+  },
 
 ];
 
