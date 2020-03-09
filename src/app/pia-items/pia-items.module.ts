@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IonSlides} from '@ionic/angular';
 
 import { IonicModule } from '@ionic/angular';
 
