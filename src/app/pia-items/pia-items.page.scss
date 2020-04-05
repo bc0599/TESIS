@@ -23,7 +23,7 @@
   
   
   ion-content {
-    --background: #ccc url("../../assets/img/back-school.jpg") no-repeat center center / cover;
+    --background: #ccc url("../../assets/img/cover-default.svg") no-repeat center center / cover;
   }
 
   
@@ -60,5 +60,5 @@
 
   .pro-tip-color{
     background: rgb(255,255,255);
-    background: linear-gradient(90deg, #0700b8 0%, #00ff88 100%);
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
   }
