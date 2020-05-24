@@ -27,15 +27,13 @@
   <div class="ion-padding-top ion-padding-bottom">
   </div>
 
-  <div class="ion-padding-top ion-padding-bottom">
-  </div>
 
     <ion-row class="ion-justify-content-center">
     
-      <ion-col size-lg="2" class="ion-margin-start"> 
+      <ion-col size-lg="2"> 
         
-        <div text-center>
-          <ion-img width="100" height="100" max-width="100px" src="assets/img/strongly-agree.png"></ion-img>  
+        <div class="text-center">
+          <ion-img width="70px" height="70px" max-width="100%" class="btn text-center" src="assets/img/strongly-agree.png"></ion-img>  
        </div>
        
       </ion-col>
@@ -50,7 +48,7 @@
       <ion-card-content>
         <p class=" h1-black regular-text ion-text-center" style=" font-weight:bold;" >
           <br>
-          Please wait while our algorithm analizes your result. 
+Espere mientras nuestro algoritmo analiza sus resultado.
           <br>
           <br>
         </p>
@@ -77,8 +75,8 @@
         </div>
       
         <ion-card-content style="width: 300px;" class="ion-padding-bottom  h1-black div-border"  style=" font-weight:bold;">
-          We know it was a long questionnaire, but you're almost done, please don't close the page until your results are shown.
-          In the meantime, why don't you rate our test?
+          Sabemos que fue un cuestionario largo, pero ya casi ha terminado, no cierre la página hasta que se muestren sus resultados.
+          Mientras tanto, ¿Por qué no calificas nuestra prueba?
           <div class="ion-padding-top ion-padding-bottom">
           </div>
 
@@ -96,9 +94,7 @@
         </div>
       
         <ion-card-content class="ion-padding-bottom h1-black div-border"  style=" font-weight:bold;">
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
-
+Por favor indica como te sentiste mientras respondias a nuestras interrogantes.
           <div class="ion-padding-top ion-padding-bottom">
           </div>
 
@@ -139,52 +135,44 @@
 
 <ion-grid fixed>
 
-<ion-row class="ion-justify-content-center">
+  <ion-row class="ion-justify-content-center">
 
-  <ion-col size-lg="2" class="ion-margin"> 
-    <button class="btn responsive" >
-      <img src="../../assets/img/strongly-agree.png" />
-      <p class="span">Strongly agree</p>
-   </button>
-  </ion-col>
-
-  <ion-col size-lg="2" class="ion-margin">
-    <button class="btn responsive" >
-      <img src="../../assets/img/agree.png"  />
-      <p class="span">Agree</p>
-   </button>
-  </ion-col>
-
-  <ion-col size-lg="2" class="ion-margin">
-    <button class="btn responsive" >
-      <img src="../../assets/img/disagree.png"  />
-      <p class="span">Disagree</p>
-   </button>
-  </ion-col>
+    <ion-col size-lg="2" class="ion-margin"> 
+      <button class="btn bigger" (click) ="randItem(res)">
+        <img src="../../assets/img/newhappy.png" />  
+        <p  style=" font-weight:bold;" class="span regular-text"></p>
+     </button>
+     
+    </ion-col>
+    
   
-  <ion-col size-lg="1" class="ion-margin">
-    <button class="btn responsive" >
-      <img src="../../assets/img/strongly-disagree.png"  />
-      <p class="span">Strongly disagree</p>
-   </button>
-  </ion-col>
-
-
-</ion-row>
-
-</ion-grid>
-
-<ion-row class="ion-justify-content-center">
-  <ion-col size="8">
-
-<div class="ion-padding-bottom" >
-
-</div>
-
-<div class="ion-padding-bottom"></div>
-
-</ion-col>
-</ion-row>
-
+    <ion-col size-lg="2" class="ion-margin">
+      <button class="btn bigger" >
+        <img src="../../assets/img/happiest.png"  />
+        <p style=" font-weight:bold;" class="span regular-text"></p>
+     </button>
+     
+    </ion-col>
+  
+    <ion-col size-lg="2" class="ion-margin">
+      <button class="btn bigger" >
+        <img src="../../assets/img/newsad.png"  />
+        <p style=" font-weight:bold;" class="span regular-text"></p>
+     </button>
+     
+    </ion-col>
+    
+    <ion-col size-lg="2" class="ion-margin">
+      <button class="btn bigger" >
+        <img src="../../assets/img/newestangry.png"  />
+        <p style=" font-weight:bold;" class="span regular-text"></p>
+     </button>
+     
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+  
+  <div class="ion-padding-bottom"></div>
+  <div class="ion-padding-bottom"></div>
 
 </ion-content>

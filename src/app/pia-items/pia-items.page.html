@@ -29,6 +29,7 @@
 
   <div class="ion-padding-top ion-padding-bottom">
   </div>
+  
 
   <ion-row class="ion-justify-content-evenly" >
 
@@ -36,8 +37,8 @@
       <ion-card class="div-border pro-tip-color" style="border-radius: 10px;" >
       
         <ion-card-content>
-          <p class=" h1-black regular-text " style=" font-weight:bold;">
-          Please think your answers carefully, once you move to the next page your answer will be stored permanently in our database.          </p>
+          <p class=" h1-black regular-text " style=" font-weight:bold;">        
+Piense cuidadosamente sus respuestas, una vez que pase a la página siguiente, su respuesta se almacenará permanentemente en nuestra base de datos.</p>
         </ion-card-content>
       </ion-card>
   </ion-col>
@@ -47,7 +48,8 @@
     
       <ion-card-content>
         <p class=" h1-black regular-text" style=" font-weight:bold;">
-          We recommend you to answer every question, this will allow us to provide a better more precise result for you.
+          
+Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle un resultado mejor y más preciso.
           <br>
           <br>
         </p>
@@ -63,73 +65,27 @@
   <div class="ion-padding-top ion-padding-bottom">
   </div>
 
-  <div class="ion-padding-top ion-padding-bottom">
-  </div>
 
-  <div class="ion-padding-top ion-padding-bottom">
-  </div>
+<ion-slides  align="center"  #slides >
 
-  <ion-slides  align="center" [options]="sliderConfig">
-
-    <ion-slide>
+    <ion-slide  *ngFor="let item of Items"  >
 
       <ion-card class="div-border">
         
         <div class="ion-padding-top ion-padding-bottom">
         </div>
       
-        <ion-card-content class="ion-padding-bottom h1-black div-border"  style=" font-weight:bold;">
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
-
-          <div class="ion-padding-top ion-padding-bottom">
-          </div>
-
-
-        </ion-card-content>
-
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-
-      <ion-card class="div-border">
+        <ion-card-content class="ion-padding-bottom h1-black div-border"  >
         
-        <div class="ion-padding-top ion-padding-bottom">
-        </div>
+          <h2 class="h1-black regular-text1 " style=" font-weight:bold;">{{item.body}}</h2>
       
-        <ion-card-content class="ion-padding-bottom h1-black div-border"  style=" font-weight:bold;">
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
 
           <div class="ion-padding-top ion-padding-bottom">
           </div>
 
-
         </ion-card-content>
 
       </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-
-      <ion-card class="div-border">
-        
-        <div class="ion-padding-top ion-padding-bottom">
-        </div>
-      
-        <ion-card-content class="ion-padding-bottom h1-black div-border"  style=" font-weight:bold;">
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
-
-          <div class="ion-padding-top ion-padding-bottom">
-          </div>
-
-
-        </ion-card-content>
-
-      </ion-card>
-      
     </ion-slide>
 
   </ion-slides>
@@ -139,43 +95,47 @@
 
   <div class="ion-padding-top ion-padding-bottom">
   </div>
-
-
    
 <ion-grid fixed>
 
 <ion-row class="ion-justify-content-center">
 
   <ion-col size-lg="2" class="ion-margin"> 
-    <button class="btn responsive" >
-      <img src="../../assets/img/strongly-agree.png" />
-      <p class="span">Strongly agree</p>
+    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()">
+      <img src="../../assets/img/newhappy.png" />  
+      <p  style=" font-weight:bold;" class="span regular-text">Totalmente de acuerdo</p>
    </button>
-  </ion-col>
-
-  <ion-col size-lg="2" class="ion-margin">
-    <button class="btn responsive" >
-      <img src="../../assets/img/agree.png"  />
-      <p class="span">Agree</p>
-   </button>
-  </ion-col>
-
-  <ion-col size-lg="2" class="ion-margin">
-    <button class="btn responsive" >
-      <img src="../../assets/img/disagree.png"  />
-      <p class="span">Disagree</p>
-   </button>
+   
   </ion-col>
   
-  <ion-col size-lg="1" class="ion-margin">
-    <button class="btn responsive" >
-      <img src="../../assets/img/strongly-disagree.png"  />
-      <p class="span">Strongly disagree</p>
+
+  <ion-col size-lg="2" class="ion-margin">
+    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()" >
+      <img src="../../assets/img/happiest.png"  />
+      <p style=" font-weight:bold;" class="span regular-text">De acuerdo</p>
    </button>
+   
   </ion-col>
 
-
+  <ion-col size-lg="2" class="ion-margin">
+    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()" >
+      <img src="../../assets/img/newsad.png"  />
+      <p style=" font-weight:bold;" class="span regular-text">En desacuerdo</p>
+   </button>
+   
+  </ion-col>
+  
+  <ion-col size-lg="2" class="ion-margin">
+    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()" >
+      <img src="../../assets/img/newestangry.png"  />
+      <p style=" font-weight:bold;" class="span regular-text">Muy en desacuerdo</p>
+   </button>
+   
+  </ion-col>
 </ion-row>
+
+<div class="ion-padding-bottom"></div>
+<div class="ion-padding-bottom"></div>
 
 </ion-grid>
 

@@ -2,9 +2,13 @@
     font-size: 100px;
   }
 
-.regular-text{
+.regular-text1{
     font-size: 16px;
-  
+}
+
+.regular-text{
+  font-size: 18px;
+  color: white;
 }
   
 .span{
@@ -26,7 +30,9 @@
     --background: #ccc url("../../assets/img/cover-default.svg") no-repeat center center / cover;
   }
 
-  
+  ion-item{
+    --background: white;
+  }
 
   .my-width{
   width:300px;
@@ -48,14 +54,14 @@
 }
 
   .btn {
-    border-radius: 50%;
-    
+    border-radius: 100%;    
   }
-
-  .responsive {
+  
+  .bigger{
     max-width: 100%;
-    max-width: 100px;
-    height: auto;
+    max-width: 118px;
+    height: 118px;
+    background: transparent
   }
 
   .pro-tip-color{

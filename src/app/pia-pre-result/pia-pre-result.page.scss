@@ -48,17 +48,28 @@
 }
 
   .btn {
-    border-radius: 50%;
+    border-radius: 100%;
     
   }
 
   .responsive {
     max-width: 100%;
-    max-width: 100px;
-    height: 100px;
+    max-width: 120px;
+    height: 120px;
+  }
+
+  .bigger{
+    max-width: 100%;
+    max-width: 118px;
+    height: 118px;
+    background: transparent
   }
 
   .pro-tip-color{
     background: rgb(255,255,255);
     background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  }
+
+  .text-center{
+    text-align: center;
   }
