@@ -17,16 +17,9 @@ export class PiaItemsService {
   constructor(public http: HttpClient) {}
 
    addUser(user: User): Observable<any> {
-     return this.http.post<Item>('http://localhost:3000/Server/pia-items', user, this.httpOptions)
+     return this.http.post<User>('http://localhost:3000/Server/piaitems', user, this.httpOptions)
        .pipe(
          catchError(this.handleError<User>('Add User'))
-       );
-   }
- 
-   getItem(title): Observable<Item[]> {
-     return this.http.get<Item[]>('http://localhost:3000/Server/pia-items/:title' + title)
-       .pipe(
-         tap(_ => console.log(`Item fetch: ${title}`))
        );
    }
 
@@ -40,7 +33,7 @@ export class PiaItemsService {
   }
   
    updateUser(id, user: User): Observable<any> {
-    return this.http.put('http://localhost:3000/Server/update-user/:id' + id, user, this.httpOptions)
+    return this.http.put('http://localhost:3000/Server/piaitems/:id' + id, user, this.httpOptions)
       .pipe(
         tap(_ => console.log(`User updated: ${id}`)),
         catchError(this.handleError<User[]>('Update User'))

@@ -68,7 +68,7 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
 
 <ion-slides  align="center"  #slides >
 
-    <ion-slide  *ngFor="let item of Items"  >
+    <ion-slide  *ngFor="let item of Items"  class="swiper-no-swiping" >
 
       <ion-card class="div-border">
         
@@ -77,8 +77,7 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
       
         <ion-card-content class="ion-padding-bottom h1-black div-border"  >
         
-          <h2 class="h1-black regular-text1 " style=" font-weight:bold;">{{item.body}}</h2>
-      
+          <h2 class="h1-black regular-text1 " id="item_body" style=" font-weight:bold;">{{item.body}}</h2>
 
           <div class="ion-padding-top ion-padding-bottom">
           </div>
@@ -99,9 +98,9 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
 <ion-grid fixed>
 
 <ion-row class="ion-justify-content-center">
-
+  
   <ion-col size-lg="2" class="ion-margin"> 
-    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()">
+    <button type="submit" id="button1" class="btn bigger btnNext" (click) ="slide(); button1clicked()">
       <img src="../../assets/img/newhappy.png" />  
       <p  style=" font-weight:bold;" class="span regular-text">Totalmente de acuerdo</p>
    </button>
@@ -110,7 +109,7 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
   
 
   <ion-col size-lg="2" class="ion-margin">
-    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()" >
+    <button  id="button2" class="btn bigger btnNext" (click) ="slide(); button2clicked()"  >
       <img src="../../assets/img/happiest.png"  />
       <p style=" font-weight:bold;" class="span regular-text">De acuerdo</p>
    </button>
@@ -118,7 +117,7 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
   </ion-col>
 
   <ion-col size-lg="2" class="ion-margin">
-    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()" >
+    <button  id="button3" class="btn bigger btnNext" (click) ="slide(); button3clicked()" >
       <img src="../../assets/img/newsad.png"  />
       <p style=" font-weight:bold;" class="span regular-text">En desacuerdo</p>
    </button>
@@ -126,11 +125,10 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
   </ion-col>
   
   <ion-col size-lg="2" class="ion-margin">
-    <button class="btn bigger btnNext" type="submit" (click) =" ngOnInit()" >
+    <button   id="button4" class="btn bigger btnNext" (click) ="slide(); button4clicked()" >
       <img src="../../assets/img/newestangry.png"  />
       <p style=" font-weight:bold;" class="span regular-text">Muy en desacuerdo</p>
    </button>
-   
   </ion-col>
 </ion-row>
 
@@ -152,6 +150,4 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
 
 </ion-col>
 </ion-row>
-
-
 </ion-content>

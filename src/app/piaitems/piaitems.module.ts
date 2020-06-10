@@ -6,9 +6,9 @@ import { IonSlides} from '@ionic/angular';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PiaItemsPageRoutingModule } from './pia-items-routing.module';
+import { PiaItemsPageRoutingModule } from './piaitems-routing.module';
 
-import { PiaItemsPage } from './pia-items.page';
+import { PiaItemsPage } from './piaitems.page';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

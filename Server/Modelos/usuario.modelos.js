@@ -3,20 +3,16 @@ const Schema = mongoose.Schema;
 
 const users= new Schema({
 
-    id_user:{type: String},
+    userr:{type: String},
 
-    user_items: {
+    user_items:{
 
-        item_id:[{
-
-            type: Number,
-
-            ref:"items"
-        }],
+        item_id:{type: String},
 
         answer:{type: String}
     }
-},{collection:'users'
+}
+,{collection:'users'
     })
     
-module.exports=mongoose.model("Users", users );
+module.exports =mongoose.model("Users", users );

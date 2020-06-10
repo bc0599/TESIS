@@ -1,8 +1,8 @@
 export class User {
-    _id: string;
-    user_items:{
-        item_id:string;
-        answer:number;
-    } 
+userr:string;
+ user_items:{
+   item_id:string;
+   answer:string;
+}
     
 }

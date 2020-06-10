@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PiaItemsService } from './pia-items.service';
+import { PiaItemsService } from './piaitems.service';
 
 describe('PiaItemsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

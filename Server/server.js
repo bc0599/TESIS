@@ -18,8 +18,6 @@ mongoose.connect(dataBaseConfig.db, {
     console.log('Could not connect to database  ' + error)
   }
 )
-
-const userRoute = require('./rutas/users.rutas');
 const itemRoute = require('./rutas/items.rutas');
 
 const app = express();
@@ -31,13 +29,16 @@ app.use(cors());
 
 // RESTful API root
 app.use('/Server', itemRoute);
-app.use('/Server', userRoute)
+
 
 // PORT
 const port = process.env.PORT || 3000;
 
 app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
 });
 
 app.listen(port, () => {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PiaItemsPage } from './pia-items.page';
+import { PiaItemsPage } from './piaitems.page';
 
 const routes: Routes = [
   {

@@ -5,8 +5,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
-    path: 'pia-items',
-    loadChildren: () => import('./pia-items/pia-items.module').then( m => m.PiaItemsPageModule)
+    path: 'piaitems',
+    loadChildren: () => import('./piaitems/piaitems.module').then( m => m.PiaItemsPageModule)
   },
   {
     path: 'pia-about-us',

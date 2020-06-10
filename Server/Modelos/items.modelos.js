@@ -11,4 +11,4 @@ const items= new Schema({
     collection:'items'
     })
 
-module.exports=mongoose.model("Item", items );
+module.exports =mongoose.model("Item", items );

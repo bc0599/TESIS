@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PiaItemsPage } from './pia-items.page';
+import { PiaitemsPage } from './piaitems.page';
 
-describe('PiaItemsPage', () => {
-  let component: PiaItemsPage;
-  let fixture: ComponentFixture<PiaItemsPage>;
+describe('PiaitemsPage', () => {
+  let component: PiaitemsPage;
+  let fixture: ComponentFixture<PiaitemsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PiaItemsPage ],
+      declarations: [ PiaitemsPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PiaItemsPage);
+    fixture = TestBed.createComponent(PiaitemsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
