@@ -34,10 +34,28 @@ export class PiaItemsPage implements OnInit {
     ) {}
 
   ngOnInit(){
+
+    window.addEventListener("beforeunload", function (e) {
+      var confirmationMessage = "\o/";
+      e.returnValue = confirmationMessage;  
+      return confirmationMessage;              
+  });
+
     this.itemAPI.getItemList().subscribe((res) => {
       this.response= cloneDeep(res);
       this.Items= this.response.sort(this.func);
       console.log(this.Items);
+      var u= Math.floor(Math.random() * (999 + 1)) + 1;
+      var us= u.toString();
+      this.user = {
+        userr: us,
+        user_items:{
+        item_id:"",
+        answer:""
+        }
+      }
+      this.onFormSubmit(this.user);
+
   })
   }
 
@@ -45,37 +63,8 @@ export class PiaItemsPage implements OnInit {
     return 0.5 - Math.random();
   } 
 
-
   slide(){ 
     this.slides.slideNext();
-  }
-
-  button1clicked(){
-    var answer="Totalmente de acuerdo";
-    this.buttonClicked(answer);
-  }
-  button2clicked(){
-    var answer="De acuerdo";
-    this.buttonClicked(answer);
-  }
-  button3clicked(){
-  var answer=" En desacuerdo";
-  this.buttonClicked(answer);
-  }
-  
-  button4clicked(){
-  var answer="Totalmente en desacuerdo";
-  this.buttonClicked(answer);
-}
-  buttonClicked(answer){
-    this.user = {
-      userr: "betsabe",
-      user_items:{
-      item_id:this.Items[0]._id,
-      answer:answer
-      }
-    }
-    this.onFormSubmit(this.user);    
   }
 
   onFormSubmit(user) {

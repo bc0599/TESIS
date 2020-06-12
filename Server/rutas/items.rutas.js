@@ -30,7 +30,7 @@ itemRoute.route('/piaitems').post((req, res, next) => {
 
 // Update user
 itemRoute.route('/piaitems/:id').put((req, res, next) => {
-  userModel.updateOne(req.params.id, {
+  userModel.findUIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error, data) => {
     if (error) {

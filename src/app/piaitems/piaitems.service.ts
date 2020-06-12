@@ -32,10 +32,10 @@ export class PiaItemsService {
       );
   }
   
-   updateUser(id, user: User): Observable<any> {
-    return this.http.put('http://localhost:3000/Server/piaitems/:id' + id, user, this.httpOptions)
+   updateUser(userr, user: User): Observable<any> {
+    return this.http.put('http://localhost:3000/Server/piaitems/:userr' + userr, user, this.httpOptions)
       .pipe(
-        tap(_ => console.log(`User updated: ${id}`)),
+        tap(_ => console.log(`User updated: ${userr}`)),
         catchError(this.handleError<User[]>('Update User'))
       );
   }
