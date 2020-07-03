@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PiaPreResultPage } from './pia-pre-result.page';
+import { PiaPreResultPage } from './piapreresult.page';
 
 const routes: Routes = [
   {

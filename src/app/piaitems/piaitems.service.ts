@@ -31,14 +31,24 @@ export class PiaItemsService {
         
       );
   }
-  
-   updateUser(userr, user: User): Observable<any> {
-    return this.http.put('http://localhost:3000/Server/piaitems/:userr' + userr, user, this.httpOptions)
+
+  getUser(): Observable<any> {
+    return this.http.get<User>('http://localhost:3000/Server/piapreresult')
       .pipe(
-        tap(_ => console.log(`User updated: ${userr}`)),
+        tap(_ => console.log('Users fetched!')),
+        catchError(this.handleError<User[]>('Get users'))
+        
+      );
+  }
+  
+   updateUser(id, data): Observable<any> {
+    return this.http.post<User>('http://localhost:3000/Server/piaitems/:' +id, data, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`User updated: `)),
         catchError(this.handleError<User[]>('Update User'))
       );
   }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

@@ -65,22 +65,36 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
   <div class="ion-padding-top ion-padding-bottom">
   </div>
 
-
 <ion-slides  align="center"  #slides >
 
-    <ion-slide  *ngFor="let item of Items"  class="swiper-no-swiping" >
+    <ion-slide id="itemsSlide" *ngFor="let item of Items"  class="swiper-no-swiping" >
 
       <ion-card class="div-border">
         
-        <div class="ion-padding-top ion-padding-bottom">
-        </div>
+        <div class="ion-padding-top ion-padding-bottom"></div>
       
         <ion-card-content class="ion-padding-bottom h1-black div-border"  >
         
           <h2 class="h1-black regular-text1 " id="item_body" style=" font-weight:bold;">{{item.body}}</h2>
 
-          <div class="ion-padding-top ion-padding-bottom">
-          </div>
+          <div class="ion-padding-top ion-padding-bottom"></div>
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide id="finishSlide" class="swiper-no-swiping" >
+
+      <ion-card class="div-border">
+        
+        <div class="ion-padding-top ion-padding-bottom"></div>
+      
+        <ion-card-content class="ion-padding-bottom h1-black div-border"  >
+        
+          <h2 class="h1-black regular-text1 " id="item_body" style=" font-weight:bold;">Listo! Por favor presiona el boton para obtener tus resultados.</h2>
+
+          <div class="ion-padding-top ion-padding-bottom"></div>
 
         </ion-card-content>
 
@@ -92,57 +106,70 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
   <div class="ion-padding-top ion-padding-bottom">
   </div>
 
-  <div class="ion-padding-top ion-padding-bottom">
-  </div>
-   
+  <ion-row id="resultButton"  align="center">
+  <ion-col size-lg="4" size-md="4" size-sm="2">
+
+    <div align="center">
+
+      <ion-button href="/piapreresult" shape="round" expand= "block" size="large" align="center">
+
+        <h1 align="center" class="span1" style=" font-weight:bold;"></h1>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        
+      </ion-button>
+
+    </div>
+  </ion-col>
+</ion-row>
+
 <ion-grid fixed>
 
-<ion-row class="ion-justify-content-center">
-  
-  <ion-col size-lg="2" class="ion-margin"> 
-    <button type="submit" id="button1" class="btn bigger btnNext" (click) ="slide();">
+<ion-row id="ansButtons" class="ion-justify-content-around" align="center">
+
+  <ion-col  size-lg="2" class="ion-padding-top"> 
+    <button   class="btn bigger" (click) ="slide(); updateUser('button1'); increaseProgress();">
       <img src="../../assets/img/newhappy.png" />  
       <p  style=" font-weight:bold;" class="span regular-text">Totalmente de acuerdo</p>
    </button>
    
   </ion-col>
-  
 
-  <ion-col size-lg="2" class="ion-margin">
-    <button  id="button2" class="btn bigger btnNext" (click) ="slide();"  >
+  <ion-col size-lg="2" class="ion-padding-top">
+    <button  class="btn bigger" (click) ="slide(); updateUser('button2'); increaseProgress();"  >
       <img src="../../assets/img/happiest.png"  />
+
       <p style=" font-weight:bold;" class="span regular-text">De acuerdo</p>
    </button>
    
   </ion-col>
 
-  <ion-col size-lg="2" class="ion-margin">
-    <button  id="button3" class="btn bigger btnNext" (click) ="slide();" >
+  <ion-col size-lg="2" class="ion-padding-top">
+    <button class="btn bigger" (click) ="slide(); updateUser('button3'); increaseProgress();" >
       <img src="../../assets/img/newsad.png"  />
       <p style=" font-weight:bold;" class="span regular-text">En desacuerdo</p>
    </button>
    
   </ion-col>
   
-  <ion-col size-lg="2" class="ion-margin">
-    <button   id="button4" class="btn bigger btnNext" (click) ="slide();" >
+  <ion-col size-lg="2" class="ion-padding-top">
+    <button class="btn bigger" (click) ="slide(); updateUser('button4'); increaseProgress();" >
       <img src="../../assets/img/newestangry.png"  />
       <p style=" font-weight:bold;" class="span regular-text">Muy en desacuerdo</p>
    </button>
   </ion-col>
+
 </ion-row>
-
-<div class="ion-padding-bottom"></div>
-<div class="ion-padding-bottom"></div>
-
 </ion-grid>
 
-<ion-row class="ion-justify-content-center">
+<div class="ion-padding-bottom"></div>
+<div class="ion-padding-bottom"></div>
+
+<ion-row id="progressBar" class="ion-justify-content-center">
   <ion-col size="8">
 
 <div class="ion-padding-bottom" >
 
-<ion-progress-bar color="secondary"  value="0.7" class="progress-bar"></ion-progress-bar>
+<ion-progress-bar color="secondary"  value={{progress}} class="progress-bar"></ion-progress-bar>
 
 </div>
 

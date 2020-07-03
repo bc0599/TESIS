@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PiaPreResultPageRoutingModule } from './pia-pre-result-routing.module';
+import { PiaPreResultPageRoutingModule } from './piapreresult-routing.module';
 
-import { PiaPreResultPage } from './pia-pre-result.page';
+import { PiaPreResultPage } from './piapreresult.page';
 
 @NgModule({
   imports: [

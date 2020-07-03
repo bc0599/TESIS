@@ -5,14 +5,15 @@ const users= new Schema({
 
     userr:{type: String},
 
-    user_items:{
-
+    user_items:[{
+        
+        _id:false,
+        
         item_id:{type: String},
 
         answer:{type: String}
-    }
-}
-,{collection:'users'
+    }]
+},{collection:'users'
     })
     
 module.exports =mongoose.model("Users", users );

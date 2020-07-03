@@ -17,8 +17,8 @@ const routes: Routes = [
     loadChildren: () => import('./pia-careers/pia-careers.module').then( m => m.PiaCareersPageModule)
   },
   {
-    path: 'pia-pre-result',
-    loadChildren: () => import('./pia-pre-result/pia-pre-result.module').then( m => m.PiaPreResultPageModule)
+    path: 'piapreresult',
+    loadChildren: () => import('./piapreresult/piapreresult.module').then( m => m.PiaPreResultPageModule)
   },
 
 ];
