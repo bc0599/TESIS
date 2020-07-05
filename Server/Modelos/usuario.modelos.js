@@ -5,6 +5,8 @@ const users= new Schema({
 
     userr:{type: String},
 
+    result:{type:String},
+
     user_items:[{
         
         _id:false,

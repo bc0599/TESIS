@@ -16,13 +16,6 @@ export class PiaItemsService {
 
   constructor(public http: HttpClient) {}
 
-   addUser(user: User): Observable<any> {
-     return this.http.post<User>('http://localhost:3000/Server/piaitems', user, this.httpOptions)
-       .pipe(
-         catchError(this.handleError<User>('Add User'))
-       );
-   }
-
    getItemList(): Observable<Item[]> {
     return this.http.get<Item[]>('http://localhost:3000/Server')
       .pipe(

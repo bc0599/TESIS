@@ -4,11 +4,11 @@ const itemRoute = express.Router();
 let itemModel = require('../Modelos/items.modelos');
 let userModel =require('../Modelos/usuario.modelos');
 
-var query=userModel.find().sort({"_id": -1}).limit(1);;
+var query=userModel.find().select('userr user_items').sort({"_id": -1}).limit(1);;
 
   // Get all items
   itemRoute.route('/').get((req, res) => {
-    itemModel.find({},'body _id',function (err, data) {
+    itemModel.find({},'body _id title',function (err, data) {
         if (err){
           console.log(err)
         }else {
@@ -30,16 +30,6 @@ var query=userModel.find().sort({"_id": -1}).limit(1);;
   }, {})
 });
 
-  // Add User
-itemRoute.route('/piaitems').post((req, res, next) => {
-  userModel.create(req.body, (error, data) => {
-    if (error) {
-      return next(error)
-    } else {
-      res.json(data)
-    }
-  })
-});
 
 // Update user
 itemRoute.route('/piaitems/:id').post((req, res) => {

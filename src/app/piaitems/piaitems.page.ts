@@ -41,6 +41,8 @@ export class PiaItemsPage implements OnInit {
   
   ngOnInit(){
 
+    //Previene al usuario de dejar o refrescar la pagina
+
     window.addEventListener("beforeunload", function (e) {
       var confirmationMessage = "\o/";
       e.returnValue = confirmationMessage;  
@@ -48,27 +50,27 @@ export class PiaItemsPage implements OnInit {
          
   });
 
+  //Manejo de botones al empezar la encuesta
   document.getElementById("resultButton").style.display = "none";
   document.getElementById('finishSlide').style.display = "none";
 
+  //Se colectan los items de la bd
+
     this.itemAPI.getItemList().subscribe((res) => {
+
+      //Se efectua una copia profunda del resultado para agilizar la app
       this.response= cloneDeep(res);
+
+      //Aletorizar el orden de los items y se crea un identificador de usuario unico para manejo de data
       this.Items= this.response.sort(this.func);
       console.log(this.Items);
-      this.user = {
-        userr: this.us,
-        user_items:[{
-        item_id:"",
-        answer:""
-        }]
-      }
-      this.onFormSubmit(this.user);
 
   })
   }
 
   updateUser(buttonId){
 
+    //Se recibe el identificador del boton para asignar respuesta a las afirmaciones
     switch (buttonId) {
 
       case buttonId="button1":
@@ -88,17 +90,24 @@ export class PiaItemsPage implements OnInit {
           break;
 
     }
+
+    //Llena el formulario de datos para la actualizacion del usuario previamente creado con el fin de agregar respuestas sistematicamente
     this.user = {
       userr:this.us,
+      result:'',
       user_items:[{
-      item_id:this.Items[this.i].body,
+      item_id:this.Items[this.i].title,
       answer:this.ans
       }]
     }
+
+    // Se envia el formulario a la base de datos 
     this.itemAPI.updateUser(this.user.userr, this.user.user_items).subscribe((res)=>{
       console.log(res);
     })
     this.i++;
+
+    //Manejo de los botones luego de terminar la encuesta
 
     if(this.i==81){
       document.getElementById("resultButton").style.display = "block";
@@ -109,15 +118,7 @@ export class PiaItemsPage implements OnInit {
     }
   }
 
-  onFormSubmit(user) {
-    this.itemAPI.addUser(user)
-      .subscribe((res) => {
-        this.zone.run(() => {
-          console.log(this.user)   
-        })
-      });
-  }
-
+  //Aumenta el progreso en la barra de progreso
   increaseProgress(){
     this.progress=this.progress+0.0121195122;
   }
