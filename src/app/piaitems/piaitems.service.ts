@@ -33,9 +33,26 @@ export class PiaItemsService {
         
       );
   }
+
+  getComparison(result): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:3000/Server/piapreresult/'+ result, this.httpOptions)
+      .pipe(
+        tap(_ => console.log('Users fetched!')),
+        catchError(this.handleError<User[]>('Get users'))
+        
+      );
+  }
   
    updateUser(id, data): Observable<any> {
-    return this.http.post<User>('http://localhost:3000/Server/piaitems/:' +id, data, this.httpOptions)
+    return this.http.post<User>('http://localhost:3000/Server/piaitems/' +id, data, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`User updated: `)),
+        catchError(this.handleError<User[]>('Update User'))
+      );
+  }
+
+  reupdateUser(id, data): Observable<any> {
+    return this.http.post<User>('http://localhost:3000/Server/piapreresult/' +id, data, this.httpOptions)
       .pipe(
         tap(_ => console.log(`User updated: `)),
         catchError(this.handleError<User[]>('Update User'))

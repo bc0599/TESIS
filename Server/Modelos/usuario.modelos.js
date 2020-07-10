@@ -1,11 +1,18 @@
 const mongoose = require ('mongoose');
+const { stringify } = require('querystring');
 const Schema = mongoose.Schema;
+
+var resultados=new Schema({
+    _id:false,
+    carrera: {type:String},
+    puntaje:{type:Number}
+})
 
 const users= new Schema({
 
     userr:{type: String},
 
-    result:{type:String},
+    result:[resultados],
 
     user_items:[{
         
@@ -17,5 +24,5 @@ const users= new Schema({
     }]
 },{collection:'users'
     })
-    
+
 module.exports =mongoose.model("Users", users );

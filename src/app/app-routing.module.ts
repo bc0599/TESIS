@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'piapreresult',
     loadChildren: () => import('./piapreresult/piapreresult.module').then( m => m.PiaPreResultPageModule)
   },
+  {
+    path: 'piaresult',
+    loadChildren: () => import('./piaresult/piaresult.module').then( m => m.PiaresultPageModule)
+  },
 
 ];
 

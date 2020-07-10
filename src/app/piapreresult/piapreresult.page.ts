@@ -4,8 +4,10 @@ import { IonSlides } from '@ionic/angular';
 import { PiaItemsService } from '../piaitems/piaitems.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {User} from '../../../Shared/user'
+import {Resultados} from '../../../Shared/resultados'
 import {cloneDeep} from 'lodash';
 import _ from 'lodash';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-pia-pre-result',
@@ -15,6 +17,7 @@ import _ from 'lodash';
 })
 export class PiaPreResultPage implements OnInit {
   user: User;
+  resultados: Resultados;
   progress:any=0;
   copyRes:any;
   deepCopy:any=[];
@@ -23,6 +26,7 @@ export class PiaPreResultPage implements OnInit {
   contaduria:number=0;
   psicologia:number=0;
   adminEmpresas:number=0;
+  result:any=[];
 
   @ViewChild('slides', {static: false}) slides: IonSlides;
 
@@ -35,14 +39,14 @@ export class PiaPreResultPage implements OnInit {
 
     //Se obtiene  el ultimo usuario creado en bd
     this.itemAPI.getUser().subscribe((res)=>{
-
+      console.log(res);
       this.copyRes=cloneDeep(res);
       this.deepCopy=cloneDeep(this.copyRes[0].user_items);
       console.log(this.deepCopy);
 
       for (var i=0; i < this.deepCopy.length; i++) {
 
-        console.log(this.deepCopy[i].item_id);
+        console.log(this.deepCopy.length);
 
         var item=this.deepCopy[i].item_id
         var answer= this.deepCopy[i].answer
@@ -53,33 +57,44 @@ export class PiaPreResultPage implements OnInit {
 
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5;
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
-
             break;
   
           case "2":
 
             switch(answer){
               case "11":
+                this.derecho+=1;
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
             break;
@@ -88,16 +103,19 @@ export class PiaPreResultPage implements OnInit {
 
             switch(answer){
               case "11":
-                console.log('ya casi');
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
             break;
@@ -105,15 +123,19 @@ export class PiaPreResultPage implements OnInit {
           case "4":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-+0.5
                 break;
             }
             
@@ -123,15 +145,27 @@ export class PiaPreResultPage implements OnInit {
             switch(answer){
 
               case "11":
+                this.csPoliticas+=1
+                this.derecho+=1
+                this.psicologia+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.derecho+=0.5
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.derecho-=1
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.derecho-=0.5
+                this.psicologia-=0.5
                 break;
             }
             break;
@@ -140,15 +174,19 @@ export class PiaPreResultPage implements OnInit {
             
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
             break;
@@ -157,15 +195,19 @@ export class PiaPreResultPage implements OnInit {
             
           switch(answer){
               case "11":
+                this.psicologia-=1
               break;
 
               case "10":
+                this.psicologia-=0.5
                 break;
               
               case "00":
+                this.psicologia+=1
                 break;
 
               case "01":
+                this.psicologia+=0.5
                 break;
             }
             break;
@@ -173,15 +215,23 @@ export class PiaPreResultPage implements OnInit {
           case "8":
             switch(answer){
               case "11":
+                this.derecho+=1
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
             break;
@@ -189,15 +239,19 @@ export class PiaPreResultPage implements OnInit {
           case "9":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
             break;
@@ -205,15 +259,19 @@ export class PiaPreResultPage implements OnInit {
           case "10":
             switch(answer){
               case "11":
+                this.contaduria-=1
               break;
 
               case "10":
+                this.contaduria-=0.5
                 break;
               
               case "00":
+                this.contaduria+=1
                 break;
 
               case "01":
+                this.contaduria+=0.5
                 break;
             }
             break;
@@ -221,15 +279,19 @@ export class PiaPreResultPage implements OnInit {
           case "11":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -237,15 +299,19 @@ export class PiaPreResultPage implements OnInit {
           case "12":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -253,15 +319,27 @@ export class PiaPreResultPage implements OnInit {
           case "13":
             switch(answer){
               case "11":
+                this.derecho-=1
+                this.csPoliticas-=1
+                this.psicologia-=1
               break;
 
               case "10":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
+                this.psicologia-=0.5
                 break;
               
               case "00":
+                this.derecho+=1
+                this.csPoliticas+=1
+                this.psicologia+=1
                 break;
 
               case "01":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
+                this.psicologia+=0.5
                 break;
             }
               break;
@@ -269,15 +347,23 @@ export class PiaPreResultPage implements OnInit {
           case "14":
             switch(answer){
               case "11":
+                this.contaduria+=1
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
+                this.adminEmpresas-=-1
                 break;
 
               case "01":
+                this.contaduria-=0.5
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -285,15 +371,23 @@ export class PiaPreResultPage implements OnInit {
           case "15":
             switch(answer){
               case "11":
+                this.contaduria+=1
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -301,15 +395,19 @@ export class PiaPreResultPage implements OnInit {
           case "16":
             switch(answer){
               case "11":
+                this.psicologia-=1
               break;
 
               case "10":
+                this.psicologia-=0.5
                 break;
               
               case "00":
+                this.psicologia+=1
                 break;
 
               case "01":
+                this.psicologia+=0.5
                 break;
             }
               break;
@@ -317,15 +415,19 @@ export class PiaPreResultPage implements OnInit {
           case "17":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -333,15 +435,19 @@ export class PiaPreResultPage implements OnInit {
           case "18":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -349,15 +455,19 @@ export class PiaPreResultPage implements OnInit {
           case "19":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -365,15 +475,23 @@ export class PiaPreResultPage implements OnInit {
           case "20":
             switch(answer){
               case "11":
+                this.derecho+=1
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -381,15 +499,19 @@ export class PiaPreResultPage implements OnInit {
           case "21":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
             break;
@@ -397,15 +519,23 @@ export class PiaPreResultPage implements OnInit {
           case "22":
             switch(answer){
               case "11":
+                this.derecho-=1
+                this.csPoliticas-=1
               break;
 
-              case "10":
+              case "10": 
+              this.derecho-=0.5
+              this.csPoliticas-=0.5
                 break;
               
               case "00":
+                this.derecho+=1
+                this.csPoliticas+=1
                 break;
 
               case "01":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
             }
               break;
@@ -413,15 +543,23 @@ export class PiaPreResultPage implements OnInit {
           case "23":
             switch(answer){
               case "11":
+                this.derecho+=1
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -429,15 +567,19 @@ export class PiaPreResultPage implements OnInit {
           case "24":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -445,15 +587,19 @@ export class PiaPreResultPage implements OnInit {
           case "25":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -461,15 +607,19 @@ export class PiaPreResultPage implements OnInit {
           case "26":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
               break;
@@ -477,15 +627,19 @@ export class PiaPreResultPage implements OnInit {
           case "27":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -493,15 +647,23 @@ export class PiaPreResultPage implements OnInit {
           case "28":
             switch(answer){
               case "11":
+                this.derecho-=1
+                this.csPoliticas-=1
               break;
 
               case "10":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
               
               case "00":
+                this.derecho+=1
+                this.csPoliticas+=1
                 break;
 
               case "01":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
             }
               break;
@@ -509,15 +671,19 @@ export class PiaPreResultPage implements OnInit {
           case "29":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -525,15 +691,27 @@ export class PiaPreResultPage implements OnInit {
           case "30":
             switch(answer){
               case "11":
+                this.derecho-=1
+                this.csPoliticas-=1
+                this.psicologia-=1
               break;
 
               case "10":
+                this.derecho-=0.5
+                this.psicologia-=0.5
+                this.csPoliticas-=0.5
                 break;
               
               case "00":
+                this.derecho+=1
+                this.psicologia+=1
+                this.csPoliticas+=1
                 break;
 
               case "01":
+                this.derecho+=0.5
+                this.psicologia+=0.5
+                this.csPoliticas+=0.5
                 break;
             }
               break;
@@ -541,15 +719,19 @@ export class PiaPreResultPage implements OnInit {
           case "31":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -557,15 +739,19 @@ export class PiaPreResultPage implements OnInit {
           case "32":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
             break;
@@ -573,15 +759,19 @@ export class PiaPreResultPage implements OnInit {
           case "33":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -589,15 +779,27 @@ export class PiaPreResultPage implements OnInit {
           case "34":
             switch(answer){
               case "11":
+                this.derecho-=1
+                this.psicologia-=1
+                this.csPoliticas-=1
               break;
 
               case "10":
+                this.derecho-=0.5
+                this.psicologia-=0.5
+                this.csPoliticas-=0.5
                 break;
               
               case "00":
+                this.derecho+=1
+                this.psicologia+=1
+                this.csPoliticas+=1
                 break;
 
               case "01":
+                this.derecho+=0.5
+                this.psicologia+=0.5
+                this.csPoliticas+=0.5
                 break;
             }
               break;
@@ -605,15 +807,23 @@ export class PiaPreResultPage implements OnInit {
           case "35":
             switch(answer){
               case "11":
+                this.derecho+=1
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -621,15 +831,19 @@ export class PiaPreResultPage implements OnInit {
           case "36":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
               break;
@@ -637,15 +851,19 @@ export class PiaPreResultPage implements OnInit {
           case "37":
             switch(answer){
               case "11":
+                this.psicologia-=1
               break;
 
               case "10":
+                this.psicologia-=0.5
                 break;
               
               case "00":
+                this.psicologia+=1
                 break;
 
               case "01":
+                this.psicologia+=0.5
                 break;
             }
               break;
@@ -653,15 +871,19 @@ export class PiaPreResultPage implements OnInit {
           case "38":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -669,15 +891,19 @@ export class PiaPreResultPage implements OnInit {
           case "39":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -685,15 +911,19 @@ export class PiaPreResultPage implements OnInit {
           case "40":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -701,15 +931,19 @@ export class PiaPreResultPage implements OnInit {
           case "41":
             switch(answer){
               case "11":
+                this.derecho+=1
               break;
 
               case "10":
+                this.derecho+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
                 break;
             }
               break;
@@ -717,15 +951,19 @@ export class PiaPreResultPage implements OnInit {
           case "42":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -733,15 +971,19 @@ export class PiaPreResultPage implements OnInit {
           case "43":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
             break;
@@ -749,15 +991,19 @@ export class PiaPreResultPage implements OnInit {
           case "44":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -765,15 +1011,23 @@ export class PiaPreResultPage implements OnInit {
           case "45":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.derecho+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.derecho+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.derecho-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.derecho-=0.5
                 break;
             }
               break;
@@ -781,15 +1035,19 @@ export class PiaPreResultPage implements OnInit {
           case "46":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -797,15 +1055,19 @@ export class PiaPreResultPage implements OnInit {
           case "47":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -813,15 +1075,19 @@ export class PiaPreResultPage implements OnInit {
           case "48":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -829,15 +1095,23 @@ export class PiaPreResultPage implements OnInit {
           case "49":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.derecho+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.derecho+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.derecho-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.derecho-=0.5
                 break;
             }
               break;
@@ -845,15 +1119,19 @@ export class PiaPreResultPage implements OnInit {
           case "50":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -861,15 +1139,19 @@ export class PiaPreResultPage implements OnInit {
           case "51":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -877,15 +1159,23 @@ export class PiaPreResultPage implements OnInit {
           case "52":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -893,15 +1183,19 @@ export class PiaPreResultPage implements OnInit {
           case "53":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -909,15 +1203,19 @@ export class PiaPreResultPage implements OnInit {
           case "54":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
             break;
@@ -925,15 +1223,23 @@ export class PiaPreResultPage implements OnInit {
           case "55":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.derecho+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.derecho+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.derecho-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.derecho-=0.5
                 break;
             }
               break;
@@ -941,15 +1247,19 @@ export class PiaPreResultPage implements OnInit {
           case "56":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -957,15 +1267,23 @@ export class PiaPreResultPage implements OnInit {
           case "57":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.psicologia+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -973,15 +1291,23 @@ export class PiaPreResultPage implements OnInit {
           case "58":
             switch(answer){
               case "11":
+                this.derecho+=1
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -989,15 +1315,23 @@ export class PiaPreResultPage implements OnInit {
           case "59":
             switch(answer){
               case "11":
+                this.derecho+=1
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.derecho+=0.5
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.derecho-=1
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.derecho-=0.5
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -1005,15 +1339,19 @@ export class PiaPreResultPage implements OnInit {
           case "60":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1021,15 +1359,23 @@ export class PiaPreResultPage implements OnInit {
           case "61":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.derecho+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.derecho+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.derecho-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.derecho-=0.5
                 break;
             }
               break;
@@ -1037,15 +1383,19 @@ export class PiaPreResultPage implements OnInit {
           case "62":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -1053,15 +1403,19 @@ export class PiaPreResultPage implements OnInit {
           case "63":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -1069,15 +1423,19 @@ export class PiaPreResultPage implements OnInit {
           case "64":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -1085,15 +1443,23 @@ export class PiaPreResultPage implements OnInit {
           case "65":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.derecho+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.derecho+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.derecho-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.derecho-=0.5
                 break;
             }
             break;
@@ -1101,15 +1467,19 @@ export class PiaPreResultPage implements OnInit {
           case "66":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1117,15 +1487,19 @@ export class PiaPreResultPage implements OnInit {
           case "67":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1133,15 +1507,19 @@ export class PiaPreResultPage implements OnInit {
           case "68":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1149,15 +1527,19 @@ export class PiaPreResultPage implements OnInit {
           case "69":
             switch(answer){
               case "11":
+                this.psicologia+=1
               break;
 
               case "10":
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.psicologia-=0.5
                 break;
             }
               break;
@@ -1165,15 +1547,19 @@ export class PiaPreResultPage implements OnInit {
           case "70":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1181,15 +1567,19 @@ export class PiaPreResultPage implements OnInit {
           case "71":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
               break;
@@ -1197,15 +1587,19 @@ export class PiaPreResultPage implements OnInit {
           case "72":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
               break;
@@ -1213,31 +1607,19 @@ export class PiaPreResultPage implements OnInit {
           case "73":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
-                break;
-            }
-              break;
-  
-          case "74":
-            switch(answer){
-              case "11":
-              break;
-
-              case "10":
-                break;
-              
-              case "00":
-                break;
-
-              case "01":
+                this.contaduria-=0.5
                 break;
             }
               break;
@@ -1245,15 +1627,19 @@ export class PiaPreResultPage implements OnInit {
           case "75":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
               break;
@@ -1261,15 +1647,23 @@ export class PiaPreResultPage implements OnInit {
           case "76":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
+                this.psicologia+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
+                this.psicologia+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
+                this.psicologia-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
+                this.psicologia-=0.5
                 break;
             }
             break;
@@ -1277,15 +1671,23 @@ export class PiaPreResultPage implements OnInit {
           case "77":
             switch(answer){
               case "11":
+                this.contaduria+=1
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1293,15 +1695,19 @@ export class PiaPreResultPage implements OnInit {
           case "78":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1309,15 +1715,19 @@ export class PiaPreResultPage implements OnInit {
           case "79":
             switch(answer){
               case "11":
+                this.contaduria+=1
               break;
 
               case "10":
+                this.contaduria+=0.5
                 break;
               
               case "00":
+                this.contaduria-=1
                 break;
 
               case "01":
+                this.contaduria-=0.5
                 break;
             }
               break;
@@ -1325,15 +1735,19 @@ export class PiaPreResultPage implements OnInit {
           case "80":
             switch(answer){
               case "11":
+                this.adminEmpresas+=1
               break;
 
               case "10":
+                this.adminEmpresas+=0.5
                 break;
               
               case "00":
+                this.adminEmpresas-=1
                 break;
 
               case "01":
+                this.adminEmpresas-=0.5
                 break;
             }
               break;
@@ -1341,28 +1755,67 @@ export class PiaPreResultPage implements OnInit {
           case "81":
             switch(answer){
               case "11":
+                this.csPoliticas+=1
               break;
 
               case "10":
+                this.csPoliticas+=0.5
                 break;
               
               case "00":
+                this.csPoliticas-=1
                 break;
 
               case "01":
+                this.csPoliticas-=0.5
                 break;
             }
               break;
   
         }
-    }
       
+} 
+console.log(this.adminEmpresas)
+console.log(this.psicologia)
+console.log(this.derecho)
+console.log(this.csPoliticas)
+console.log(this.contaduria)  
+
+var array=[{ carrera:'adminEmpresas', puntaje:this.adminEmpresas},
+{ carrera:'psicologia', puntaje:this.psicologia},
+{ carrera:'contaduria', puntaje:this.contaduria},
+{ carrera:'derecho', puntaje:this.derecho},
+{ carrera:'csPoliticas', puntaje:this.csPoliticas}]
+
+array.sort(function(a, b) {
+  return b.puntaje- a.puntaje;
+});
+
+var fArray= array.filter(function (c) {
+  return c.puntaje > 0;
+});
+
+if(fArray.length===0){
+
+  fArray.push({carrera:'indeterminado', puntaje:null})
+  
+}
+
+this.resultados=cloneDeep(fArray);
+
+this.itemAPI.reupdateUser(this.copyRes[0].userr, this.resultados).subscribe((res)=>{
+  console.log(res)
+})
+
+
+this.itemAPI.getComparison(this.resultados[0]).subscribe((res1)=>{
+  console.log('estas son las comparaciones'+res1);
+})
     })
 
     // Manejo de botones y vistas
     document.getElementById('ansButtons').style.display = "block";
     document.getElementById('resultButton').style.display = "none";
-
     
   }
     
@@ -1380,9 +1833,4 @@ export class PiaPreResultPage implements OnInit {
     
   }
 
-  analizeAnswers(deepCop){
-    for(let i=0; i<deepCop.length; i++){
-
-    }
-  }
 }

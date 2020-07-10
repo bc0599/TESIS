@@ -94,7 +94,6 @@ export class PiaItemsPage implements OnInit {
     //Llena el formulario de datos para la actualizacion del usuario previamente creado con el fin de agregar respuestas sistematicamente
     this.user = {
       userr:this.us,
-      result:'',
       user_items:[{
       item_id:this.Items[this.i].title,
       answer:this.ans
@@ -109,7 +108,7 @@ export class PiaItemsPage implements OnInit {
 
     //Manejo de los botones luego de terminar la encuesta
 
-    if(this.i==81){
+    if(this.i==80){
       document.getElementById("resultButton").style.display = "block";
       document.getElementById('ansButtons').style.display = "none";
       document.getElementById('progressBar').style.display = "none";
