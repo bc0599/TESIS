@@ -12,15 +12,15 @@
 <ion-row class="ion-justify-content-center">
 
   <ion-col size-lg="4" > 
-    <ion-button  href="/pia-careers" class = "span" shape="block"  color="primary" style=" font-weight:bold;" >Carreras</ion-button>
+    <ion-button  (click)="go('button1')" class = "span" shape="block"  color="primary" style=" font-weight:bold;" >Carreras</ion-button>
   </ion-col>
 
   <ion-col size-lg="4">
-    <ion-button href="/pia-about-us" class = "span" shape="block" color="secondary" style=" font-weight:bold;">Sobre nosotros</ion-button>
+    <ion-button (click)="go('button2')" class = "span" shape="block" color="secondary" style=" font-weight:bold;">Sobre nosotros</ion-button>
   </ion-col>
 
   <ion-col size-lg="4">
-    <ion-button  href="/piaitems" style=" font-weight:bold;" class = "span "  shape="block" color="tertiary" >Empieza la encuesta</ion-button>
+    <ion-button  (click)="go('button3')" style=" font-weight:bold;" class = "span "  shape="block" color="tertiary" >Empieza la encuesta</ion-button>
   </ion-col>
 
 </ion-row>
@@ -76,7 +76,7 @@
 
     <div align="center " class="ion-padding-start">
 
-      <ion-button   href="/piaitems" shape="round" expand= "block" size="large" align="center">
+      <ion-button (click)="go('button4')" shape="round" expand= "block" size="large" align="center">
 
         <h1 align="center" class="span1" style=" font-weight:bold;">Empezar</h1>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>

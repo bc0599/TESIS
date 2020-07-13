@@ -7,7 +7,6 @@ import {User} from '../../../Shared/user'
 import {Resultados} from '../../../Shared/resultados'
 import {cloneDeep} from 'lodash';
 import _ from 'lodash';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-pia-pre-result',
@@ -21,12 +20,14 @@ export class PiaPreResultPage implements OnInit {
   progress:any=0;
   copyRes:any;
   deepCopy:any=[];
+  compareCopy:any=[];
+  retreivedUsers:any=[];
   derecho:number=0;
   csPoliticas:number=0;
   contaduria:number=0;
   psicologia:number=0;
   adminEmpresas:number=0;
-  result:any=[];
+  coincidencias:number=0
 
   @ViewChild('slides', {static: false}) slides: IonSlides;
 
@@ -1781,11 +1782,13 @@ console.log(this.derecho)
 console.log(this.csPoliticas)
 console.log(this.contaduria)  
 
-var array=[{ carrera:'adminEmpresas', puntaje:this.adminEmpresas},
+var array=[ 
+{carrera:'adminEmpresas', puntaje:this.adminEmpresas},
 { carrera:'psicologia', puntaje:this.psicologia},
 { carrera:'contaduria', puntaje:this.contaduria},
 { carrera:'derecho', puntaje:this.derecho},
-{ carrera:'csPoliticas', puntaje:this.csPoliticas}]
+{ carrera:'csPoliticas', puntaje:this.csPoliticas}
+]
 
 array.sort(function(a, b) {
   return b.puntaje- a.puntaje;
@@ -1796,9 +1799,7 @@ var fArray= array.filter(function (c) {
 });
 
 if(fArray.length===0){
-
   fArray.push({carrera:'indeterminado', puntaje:null})
-  
 }
 
 this.resultados=cloneDeep(fArray);
@@ -1807,16 +1808,45 @@ this.itemAPI.reupdateUser(this.copyRes[0].userr, this.resultados).subscribe((res
   console.log(res)
 })
 
+this.itemAPI.getComparison(this.resultados[0].carrera).subscribe((res1)=>{
+  console.log('estas son las comparaciones'+ res1);
 
-this.itemAPI.getComparison(this.resultados[0]).subscribe((res1)=>{
-  console.log('estas son las comparaciones'+res1);
+  this.compareCopy=cloneDeep(res1);
+
+for(let j=0; j<this.compareCopy.length; j++){
+  this.compareCopy[j].user_items.sort(function(a, b) {
+    return parseFloat(a.item_id) - parseFloat(b.item_id);
+});
+}
+
+  this.deepCopy.sort(function(a, b) {
+  return parseFloat(a.item_id) - parseFloat(b.item_id);
+});
+
+var ru: any=[];
+for(var w=0; w<this.compareCopy.length; w++){
+  ru.push(this.compareCopy[w].user_items)
+  }
+
+  this.retreivedUsers=cloneDeep(ru);
+
+  for(var t=0; t<this.retreivedUsers.length; t++){
+  this.compareUsers(this.retreivedUsers[t], this.deepCopy)
+  }
+  
+  })
 })
-    })
 
     // Manejo de botones y vistas
     document.getElementById('ansButtons').style.display = "block";
     document.getElementById('resultButton').style.display = "none";
     
+  }
+
+
+  compareUsers(array1, array2){
+      console.log( _.intersectionWith(array1, array2,  _.isEqual));   
+  
   }
     
   slide(){ 
@@ -1825,12 +1855,24 @@ this.itemAPI.getComparison(this.resultados[0]).subscribe((res1)=>{
 
   // Manejo de botones y vistas
   increase(){
+    
     this.progress=this.progress+1
     if(this.progress==4){
       document.getElementById('ansButtons').style.display = "none";
       document.getElementById('resultButton').style.display = "block";
     }
     
+  }
+
+  go(buttonId){
+
+    switch (buttonId) {
+  
+      case buttonId="button1":
+        this.router.navigate(['piaitems']);
+          break;
+  
+    }
   }
 
 }

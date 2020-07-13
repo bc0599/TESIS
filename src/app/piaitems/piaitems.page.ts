@@ -130,4 +130,19 @@ slide(){
   this.slides.slideNext();
 }
 
+go(buttonId){
+
+  switch (buttonId) {
+
+    case buttonId="button1":
+      this.router.navigate(['home']);
+        break;
+
+    case buttonId="button2":
+      this.router.navigate(['piapreresult']);
+        break;
+
+  }
+}
+
 }

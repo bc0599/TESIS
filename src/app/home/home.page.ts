@@ -13,7 +13,6 @@ import {User} from '../../../Shared/user'
 })
 
 export class HomePage implements OnInit{
-  
 
   constructor( private router: Router,
     public fb: FormBuilder,
@@ -24,5 +23,26 @@ export class HomePage implements OnInit{
    
   }
 
+  go(buttonId){
 
+    switch (buttonId) {
+
+      case buttonId="button1":
+        this.router.navigate(['pia-careers']);
+          break;
+
+      case buttonId="button2":
+        this.router.navigate(['pia-about-us']);
+          break;
+
+      case buttonId="button3":
+        this.router.navigate(['piaitems']);
+          break;
+
+     case buttonId="button4":
+        this.router.navigate(['pia-careers']);
+          break;
+
+    }
+  }
 }

@@ -15,7 +15,7 @@
 
       <div>
   
-      <ion-button href="/home" style=" --background:translucent;" fill="clear" >
+      <ion-button (click)="go('button1')" style=" --background:translucent;" fill="clear" >
         <ion-icon name="arrow-back"  style="--background:translucent;" size="large"></ion-icon>
       </ion-button>
 
@@ -111,7 +111,7 @@ Le recomendamos que responda todas las preguntas, esto nos permitirá brindarle 
 
     <div align="center">
 
-      <ion-button href="/piapreresult" shape="round" expand= "block" size="large" align="center">
+      <ion-button (click)="go('button2')" shape="round" expand= "block" size="large" align="center">
 
         <h1 align="center" class="span1" style=" font-weight:bold;"></h1>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>

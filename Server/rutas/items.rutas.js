@@ -54,8 +54,8 @@ itemRoute.route('/piapreresult/:id').post((req, res) => {
 });
 
 // Recopilar usuarios para traerlos
-itemRoute.route('/piapreresult/:result').get((req, res) => {
-var query1= userModel.find({'result':req.params.result}).limit(5);
+itemRoute.route('/piapreresult/:carrera').get((req, res) => {
+var query1= userModel.find({'result.carrera':req.params.carrera});
 query1.exec(function (err, data) {
   if (err){
     console.log(err)
