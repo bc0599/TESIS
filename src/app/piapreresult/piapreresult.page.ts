@@ -15,19 +15,20 @@ import _ from 'lodash';
   providers: [PiaItemsService]
 })
 export class PiaPreResultPage implements OnInit {
-  user: User;
   resultados: Resultados;
   progress:any=0;
   copyRes:any;
   deepCopy:any=[];
   compareCopy:any=[];
   retreivedUsers:any=[];
+  matches:any=[];
+  percentages:any=[];
+  flattenMatches:any=[];
   derecho:number=0;
   csPoliticas:number=0;
   contaduria:number=0;
   psicologia:number=0;
   adminEmpresas:number=0;
-  coincidencias:number=0
 
   @ViewChild('slides', {static: false}) slides: IonSlides;
 
@@ -1830,9 +1831,7 @@ for(var w=0; w<this.compareCopy.length; w++){
 
   this.retreivedUsers=cloneDeep(ru);
 
-  for(var t=0; t<this.retreivedUsers.length; t++){
-  this.compareUsers(this.retreivedUsers[t], this.deepCopy)
-  }
+  this.compareUsers(this.retreivedUsers,this.deepCopy);
   
   })
 })
@@ -1843,12 +1842,36 @@ for(var w=0; w<this.compareCopy.length; w++){
     
   }
 
-
   compareUsers(array1, array2){
-      console.log( _.intersectionWith(array1, array2,  _.isEqual));   
+    
+    for(var t=0; t<array1.length; t++){
+
+    this.matches.push( _.intersectionWith(array1[t], array2,  _.isEqual)); 
+    this.percentages.push(this.matches[t].length/array2.length); 
+
+    }
+
+    this.percentages = this.percentages.map(function(x){ return x * 100; });
+    this.percentages=_.mean(this.percentages);
+    console.log(this.percentages)
+
+   var fM:any=[];
+
+   fM=cloneDeep( _.flattenDeep(this.matches))
+   
+   fM.sort(function(a, b) {
+      return parseFloat(a.item_id) - parseFloat(b.item_id);
+  });
+    const lookup = fM.reduce((a, e) => {
+    a[e.item_id] = ++a[e.item_id] || 0;
+    return a;
+  }, {});
+
+  this.flattenMatches=fM.filter(e => lookup[e.item_id]);
+  this.flattenMatches=_.uniqWith(this.flattenMatches, _.isEqual);
   
   }
-    
+  
   slide(){ 
     this.slides.slideNext();
   }
