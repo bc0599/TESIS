@@ -4,6 +4,7 @@ const itemRoute = express.Router();
 let itemModel = require('../Modelos/items.modelos');
 let userModel =require('../Modelos/usuario.modelos');
 
+
   // Get all items
   itemRoute.route('/').get((req, res) => {
     itemModel.find({},'body _id title',function (err, data) {
@@ -65,5 +66,6 @@ query1.exec(function (err, data) {
 } 
 })
 });
+
 
 module.exports=itemRoute;

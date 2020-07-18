@@ -3,10 +3,8 @@ import { ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { PiaItemsService } from '../piaitems/piaitems.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {User} from '../../../Shared/user'
-import {Resultados} from '../../../Shared/resultados'
 import {cloneDeep} from 'lodash';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-pia-pre-result',
@@ -14,16 +12,18 @@ import _ from 'lodash';
   styleUrls: ['./piapreresult.page.scss'],
   providers: [PiaItemsService]
 })
-export class PiaPreResultPage implements OnInit {
-  resultados: Resultados;
+export class PiaPreResultPage {
+  resultados:any=[];
   progress:any=0;
   copyRes:any;
   deepCopy:any=[];
   compareCopy:any=[];
   retreivedUsers:any=[];
   matches:any=[];
-  percentages:any=[];
+  percentages:any
   flattenMatches:any=[];
+  finalPercentages:any=[];
+  finalMatches:any=[];
   derecho:number=0;
   csPoliticas:number=0;
   contaduria:number=0;
@@ -37,14 +37,21 @@ export class PiaPreResultPage implements OnInit {
     private itemAPI: PiaItemsService,
     public route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
 
     //Se obtiene  el ultimo usuario creado en bd
     this.itemAPI.getUser().subscribe((res)=>{
+
       console.log(res);
+
+      //Se realizan dos copias profunda de la respuesta del servidor para manejar la data
       this.copyRes=cloneDeep(res);
+
+      //Se almacena la data relevante sobre el usuario en un arreglo 
       this.deepCopy=cloneDeep(this.copyRes[0].user_items);
       console.log(this.deepCopy);
+
+      //Se recorre el arreglo para analizar las respuestas proporcionadas por el usuario
 
       for (var i=0; i < this.deepCopy.length; i++) {
 
@@ -1783,6 +1790,8 @@ console.log(this.derecho)
 console.log(this.csPoliticas)
 console.log(this.contaduria)  
 
+//Se crea un arreglo de objetos para ser ingresados posteriormente en bd
+
 var array=[ 
 {carrera:'adminEmpresas', puntaje:this.adminEmpresas},
 { carrera:'psicologia', puntaje:this.psicologia},
@@ -1791,86 +1800,134 @@ var array=[
 { carrera:'csPoliticas', puntaje:this.csPoliticas}
 ]
 
+//Se ordena el arreglo en orden ascendente para establecer el orden de los resultados obtenidos
 array.sort(function(a, b) {
   return b.puntaje- a.puntaje;
 });
 
-var fArray= array.filter(function (c) {
+//Se filtra el arreglo para eliminar todos los resultados menores a cero
+this.resultados= array.filter(function (c) {
   return c.puntaje > 0;
 });
 
-if(fArray.length===0){
-  fArray.push({carrera:'indeterminado', puntaje:null})
+//Se condiciona en caso de que el arreglo quede vacio luego de la filtracion 
+if(this.resultados.length===0){
+  this.resultados.push({carrera:'indeterminado', puntaje:null})
 }
 
-this.resultados=cloneDeep(fArray);
+console.log(this.resultados)
+//Se efectua una copia profunda del arreglo resultante para guardado y extraccion de data 
 
-this.itemAPI.reupdateUser(this.copyRes[0].userr, this.resultados).subscribe((res)=>{
-  console.log(res)
-})
+if(this.resultados.length===1){
 
-this.itemAPI.getComparison(this.resultados[0].carrera).subscribe((res1)=>{
-  console.log('estas son las comparaciones'+ res1);
-
-  this.compareCopy=cloneDeep(res1);
-
-for(let j=0; j<this.compareCopy.length; j++){
-  this.compareCopy[j].user_items.sort(function(a, b) {
-    return parseFloat(a.item_id) - parseFloat(b.item_id);
-});
+this.compareUsers(this.resultados[0].carrera)
 }
 
-  this.deepCopy.sort(function(a, b) {
-  return parseFloat(a.item_id) - parseFloat(b.item_id);
-});
+if(this.resultados.length===2){
+  for(let op=0;op<2;op++){
+    this.compareUsers(this.resultados[op].carrera)
+    
+      }
+}
 
-var ru: any=[];
-for(var w=0; w<this.compareCopy.length; w++){
-  ru.push(this.compareCopy[w].user_items)
-  }
-
-  this.retreivedUsers=cloneDeep(ru);
-
-  this.compareUsers(this.retreivedUsers,this.deepCopy);
+if(this.resultados.length===3){
+  for(let op=0;op<3;op++){
+    this.compareUsers(this.resultados[op].carrera)
+    
+      }
   
-  })
+}
+
+if(this.resultados.length===4){
+  for(let we=0;we<3;we++){
+this.compareUsers(this.resultados[we].carrera)
+
+  }
+}
+
+if(this.resultados.length===5){
+  for(let yu=0;yu<3;yu++){
+    this.compareUsers(this.resultados[yu].carrera)
+    
+      }
+}
+
+
 })
 
+    
     // Manejo de botones y vistas
     document.getElementById('ansButtons').style.display = "block";
     document.getElementById('resultButton').style.display = "none";
-    
+
   }
 
-  compareUsers(array1, array2){
-    
-    for(var t=0; t<array1.length; t++){
+  compareUsers(resultados){
 
-    this.matches.push( _.intersectionWith(array1[t], array2,  _.isEqual)); 
-    this.percentages.push(this.matches[t].length/array2.length); 
+      this.itemAPI.getComparison(resultados).subscribe((res1)=>{
+        console.log('estas son las comparaciones'+ res1);
+      
+        this.compareCopy=cloneDeep(res1);
+      
+          //Se ordenan en orden ascendente los arreglos que reultan de la busqueda anterior
+          for(let j=0; j<this.compareCopy.length; j++){
+            this.compareCopy[j].user_items.sort(function(a, b) {
+              return parseFloat(a.item_id) - parseFloat(b.item_id);
+          });
+          }
+          // Se ordenan en forma ascendente el arreglo que contiene las respuestas del usuario actual
+            this.deepCopy.sort(function(a, b) {
+            return parseFloat(a.item_id) - parseFloat(b.item_id);
+          });
+          
+          //Se integran las respuesas de los usuarios recopilados a un solo arreglo, creando un arreglo multidimensional 
+          var ru: any=[];
+          for(var w=0; w<this.compareCopy.length; w++){
+            ru.push(this.compareCopy[w].user_items)
+            }
+          
+            //Se ejecuta una copia profunda de el arreglo resultante de la operacion anterior
+            this.retreivedUsers=cloneDeep(ru);
+         
+           //Se ingresan dos arreglos, siendo el primero el arreglo multidimensional y el segundo el arregloe que contiene las respuestas del usuario actual
+          for(var t=0; t<this.retreivedUsers.length; t++){
+      
+            //Se obtiene la interseccion entre ambos arreglos
+            this.matches.push( _.intersectionWith(this.retreivedUsers[t], this.deepCopy,  _.isEqual)); 
+            var arrayPercentages:any=[]
+            arrayPercentages.push(this.matches[t].length/this.deepCopy.length); 
+        
+            }
+            //Se calcula el porcentaje de coincidencias entre el usuario y cada uno de los usuarios con respuestas similares y se calcula el promedio entre dichos porcentajes
+            arrayPercentages = arrayPercentages.map(function(x){ return x * 100; });
+            this.percentages=_.mean(arrayPercentages);
+        
+           // Se ingresan todas las respuestas de los usuarios adyacentes en un arreglo que luego pasa a ser unidimensional 
+           var fM:any=[];
+        
+           fM=cloneDeep( _.flattenDeep(this.matches))
+        
+           //Se ordena el arreglo unidimensional en orden ascendente
+           fM.sort(function(a, b) {
+              return parseFloat(a.item_id) - parseFloat(b.item_id);
+          });
+        
+          //Se identifican las coincidencias entre los arreglos y se organizan ascendentemente 
+            const lookup = fM.reduce((a, e) => {
+            a[e.item_id] = ++a[e.item_id] || 0;
+            return a;
+          }, {});
+        
+          this.flattenMatches=fM.filter(e => lookup[e.item_id]);
+        
+          //Se eliminan los elementos duplicados
+          this.flattenMatches=_.uniqWith(this.flattenMatches, _.isEqual);
+          this.finalPercentages.push({carrera:resultados,porcentaje:this.percentages,preguntas:this.flattenMatches})
+          })
+          console.log(this.finalPercentages)
 
-    }
-
-    this.percentages = this.percentages.map(function(x){ return x * 100; });
-    this.percentages=_.mean(this.percentages);
-    console.log(this.percentages)
-
-   var fM:any=[];
-
-   fM=cloneDeep( _.flattenDeep(this.matches))
-   
-   fM.sort(function(a, b) {
-      return parseFloat(a.item_id) - parseFloat(b.item_id);
-  });
-    const lookup = fM.reduce((a, e) => {
-    a[e.item_id] = ++a[e.item_id] || 0;
-    return a;
-  }, {});
-
-  this.flattenMatches=fM.filter(e => lookup[e.item_id]);
-  this.flattenMatches=_.uniqWith(this.flattenMatches, _.isEqual);
-  
   }
+
   
   slide(){ 
     this.slides.slideNext();
@@ -1891,8 +1948,8 @@ for(var w=0; w<this.compareCopy.length; w++){
 
     switch (buttonId) {
   
-      case buttonId="button1":
-        this.router.navigate(['piaitems']);
+      case buttonId="button2":
+        this.router.navigate(['piaresult']);
           break;
   
     }

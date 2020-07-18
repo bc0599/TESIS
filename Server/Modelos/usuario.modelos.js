@@ -1,5 +1,4 @@
 const mongoose = require ('mongoose');
-const { stringify } = require('querystring');
 const Schema = mongoose.Schema;
 
 var resultados=new Schema({
@@ -21,8 +20,11 @@ const users= new Schema({
         item_id:{type: String},
 
         answer:{type: String}
-    }]
+    }],
+
+
 },{collection:'users'
     })
 
 module.exports =mongoose.model("Users", users );
+

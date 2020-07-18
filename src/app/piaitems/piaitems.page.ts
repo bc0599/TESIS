@@ -38,17 +38,19 @@ export class PiaItemsPage implements OnInit {
     private itemAPI: PiaItemsService,
     public route: ActivatedRoute
     ) {}
-  
-  ngOnInit(){
 
+    ngOnInit(){
+    
     //Previene al usuario de dejar o refrescar la pagina
-
     window.addEventListener("beforeunload", function (e) {
       var confirmationMessage = "\o/";
       e.returnValue = confirmationMessage;  
       return confirmationMessage;    
          
   });
+    }
+  
+  ionViewDidEnter(){
 
   //Manejo de botones al empezar la encuesta
   document.getElementById("resultButton").style.display = "none";
@@ -94,6 +96,10 @@ export class PiaItemsPage implements OnInit {
     //Llena el formulario de datos para la actualizacion del usuario previamente creado con el fin de agregar respuestas sistematicamente
     this.user = {
       userr:this.us,
+      result:[{
+        carrera:'',
+        puntuacion:0
+      }],
       user_items:[{
       item_id:this.Items[this.i].title,
       answer:this.ans
@@ -139,7 +145,7 @@ go(buttonId){
         break;
 
     case buttonId="button2":
-      this.router.navigate(['piapreresult']);
+      this.router.navigate(['piapreresult'], { state: { userr: this.us } });
         break;
 
   }

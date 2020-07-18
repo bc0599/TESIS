@@ -40,7 +40,7 @@ export class HomePage implements OnInit{
           break;
 
      case buttonId="button4":
-        this.router.navigate(['pia-careers']);
+        this.router.navigate(['piaitems']);
           break;
 
     }
