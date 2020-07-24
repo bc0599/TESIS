@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { PiaItemsService } from '../piaitems/piaitems.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {cloneDeep} from 'lodash';
+import { NavController } from '@ionic/angular';
+import {Results} from '../../../Shared/results'
 import * as _ from 'lodash';
 
 @Component({
@@ -13,17 +15,16 @@ import * as _ from 'lodash';
   providers: [PiaItemsService]
 })
 export class PiaPreResultPage {
-  resultados:any=[];
+  results:Results;
+  partialResults:any=[];
   progress:any=0;
-  copyRes:any;
-  deepCopy:any=[];
+  responseCopy:any;
+  itemsCopy:any=[];
   compareCopy:any=[];
   retreivedUsers:any=[];
   matches:any=[];
-  percentages:any
-  flattenMatches:any=[];
-  finalPercentages:any=[];
   finalMatches:any=[];
+  finalPercentages:any=[];
   derecho:number=0;
   csPoliticas:number=0;
   contaduria:number=0;
@@ -35,7 +36,8 @@ export class PiaPreResultPage {
   constructor( 
     private router: Router,   
     private itemAPI: PiaItemsService,
-    public route: ActivatedRoute) { }
+    private navCtrl: NavController
+  ) { }
 
   ionViewWillEnter() {
 
@@ -45,20 +47,22 @@ export class PiaPreResultPage {
       console.log(res);
 
       //Se realizan dos copias profunda de la respuesta del servidor para manejar la data
-      this.copyRes=cloneDeep(res);
+      this.responseCopy=cloneDeep(res);
+
+      sessionStorage.setItem('user', this.responseCopy[0].userr)
 
       //Se almacena la data relevante sobre el usuario en un arreglo 
-      this.deepCopy=cloneDeep(this.copyRes[0].user_items);
-      console.log(this.deepCopy);
+      this.itemsCopy=cloneDeep(this.responseCopy[0].user_items);
+      console.log(this.itemsCopy);
 
       //Se recorre el arreglo para analizar las respuestas proporcionadas por el usuario
 
-      for (var i=0; i < this.deepCopy.length; i++) {
+      for (var i=0; i < this.itemsCopy.length; i++) {
 
-        console.log(this.deepCopy.length);
+        console.log(this.itemsCopy.length);
 
-        var item=this.deepCopy[i].item_id
-        var answer= this.deepCopy[i].answer
+        var item=this.itemsCopy[i].item_id
+        var answer= this.itemsCopy[i].answer
         
         switch(item){
 
@@ -1792,79 +1796,76 @@ console.log(this.contaduria)
 
 //Se crea un arreglo de objetos para ser ingresados posteriormente en bd
 
-var array=[ 
-{carrera:'adminEmpresas', puntaje:this.adminEmpresas},
-{ carrera:'psicologia', puntaje:this.psicologia},
-{ carrera:'contaduria', puntaje:this.contaduria},
-{ carrera:'derecho', puntaje:this.derecho},
-{ carrera:'csPoliticas', puntaje:this.csPoliticas}
+var careersArray=[ 
+{career:'adminEmpresas', points:this.adminEmpresas},
+{ career:'psicologia', points:this.psicologia},
+{ career:'contaduria', points:this.contaduria},
+{ career:'derecho', points:this.derecho},
+{ career:'csPoliticas', points:this.csPoliticas}
 ]
 
-//Se ordena el arreglo en orden ascendente para establecer el orden de los resultados obtenidos
-array.sort(function(a, b) {
-  return b.puntaje- a.puntaje;
+//Se ordena el arreglo en orden ascendente para establecer el orden de los partialResults obtenidos
+careersArray.sort(function(a, b) {
+  return b.points- a.points;
 });
 
-//Se filtra el arreglo para eliminar todos los resultados menores a cero
-this.resultados= array.filter(function (c) {
-  return c.puntaje > 0;
+//Se filtra el arreglo para eliminar todos los partialResults menores a cero
+this.partialResults= careersArray.filter(function (c) {
+  return c.points > 0;
 });
 
 //Se condiciona en caso de que el arreglo quede vacio luego de la filtracion 
-if(this.resultados.length===0){
-  this.resultados.push({carrera:'indeterminado', puntaje:null})
+if(this.partialResults.length===0){
+  this.results={career:null,points:null,coincidence_percentage:null,coincidence_questions:null}
 }
 
-console.log(this.resultados)
+console.log(this.partialResults)
 //Se efectua una copia profunda del arreglo resultante para guardado y extraccion de data 
 
-if(this.resultados.length===1){
+if(this.partialResults.length===1){
 
-this.compareUsers(this.resultados[0].carrera)
+this.compareUsers(this.partialResults[0].career, this.partialResults[0].points)
 }
 
-if(this.resultados.length===2){
-  for(let op=0;op<2;op++){
-    this.compareUsers(this.resultados[op].carrera)
+if(this.partialResults.length===2){
+  for(let se=0;se<2;se++){
+    this.compareUsers(this.partialResults[se].career, this.partialResults[se].points)
     
       }
 }
 
-if(this.resultados.length===3){
+if(this.partialResults.length===3){
   for(let op=0;op<3;op++){
-    this.compareUsers(this.resultados[op].carrera)
+    this.compareUsers(this.partialResults[op].career, this.partialResults[op].points)
     
       }
   
 }
 
-if(this.resultados.length===4){
+if(this.partialResults.length===4){
   for(let we=0;we<3;we++){
-this.compareUsers(this.resultados[we].carrera)
+this.compareUsers(this.partialResults[we].career, this.partialResults[we].points)
 
   }
 }
 
-if(this.resultados.length===5){
+if(this.partialResults.length===5){
   for(let yu=0;yu<3;yu++){
-    this.compareUsers(this.resultados[yu].carrera)
-    
+    this.compareUsers(this.partialResults[yu].career, this.partialResults[yu].points)
       }
 }
 
-
 })
 
-    
     // Manejo de botones y vistas
     document.getElementById('ansButtons').style.display = "block";
     document.getElementById('resultButton').style.display = "none";
 
   }
 
-  compareUsers(resultados){
+  compareUsers(partialResults, points){
 
-      this.itemAPI.getComparison(resultados).subscribe((res1)=>{
+      this.itemAPI.getComparison(partialResults).subscribe((res1)=>{
         console.log('estas son las comparaciones'+ res1);
       
         this.compareCopy=cloneDeep(res1);
@@ -1876,10 +1877,9 @@ if(this.resultados.length===5){
           });
           }
           // Se ordenan en forma ascendente el arreglo que contiene las respuestas del usuario actual
-            this.deepCopy.sort(function(a, b) {
+            this.itemsCopy.sort(function(a, b) {
             return parseFloat(a.item_id) - parseFloat(b.item_id);
           });
-          
           //Se integran las respuesas de los usuarios recopilados a un solo arreglo, creando un arreglo multidimensional 
           var ru: any=[];
           for(var w=0; w<this.compareCopy.length; w++){
@@ -1893,14 +1893,14 @@ if(this.resultados.length===5){
           for(var t=0; t<this.retreivedUsers.length; t++){
       
             //Se obtiene la interseccion entre ambos arreglos
-            this.matches.push( _.intersectionWith(this.retreivedUsers[t], this.deepCopy,  _.isEqual)); 
+            this.matches.push( _.intersectionWith(this.retreivedUsers[t], this.itemsCopy,  _.isEqual)); 
             var arrayPercentages:any=[]
-            arrayPercentages.push(this.matches[t].length/this.deepCopy.length); 
+            arrayPercentages.push(this.matches[t].length/this.itemsCopy.length); 
         
             }
             //Se calcula el porcentaje de coincidencias entre el usuario y cada uno de los usuarios con respuestas similares y se calcula el promedio entre dichos porcentajes
             arrayPercentages = arrayPercentages.map(function(x){ return x * 100; });
-            this.percentages=_.mean(arrayPercentages);
+            this.finalPercentages=_.mean(arrayPercentages);
         
            // Se ingresan todas las respuestas de los usuarios adyacentes en un arreglo que luego pasa a ser unidimensional 
            var fM:any=[];
@@ -1918,16 +1918,48 @@ if(this.resultados.length===5){
             return a;
           }, {});
         
-          this.flattenMatches=fM.filter(e => lookup[e.item_id]);
+          this.finalMatches=fM.filter(e => lookup[e.item_id]);
         
           //Se eliminan los elementos duplicados
-          this.flattenMatches=_.uniqWith(this.flattenMatches, _.isEqual);
-          this.finalPercentages.push({carrera:resultados,porcentaje:this.percentages,preguntas:this.flattenMatches})
+          this.finalMatches=_.uniqWith(this.finalMatches, _.isEqual);
+
+            this.results={career:partialResults,points:points,coincidence_percentage:this.finalPercentages,coincidence_questions:this.finalMatches}
+
+            if((this.finalPercentages<=100)&&(this.finalPercentages>90)){
+              this.results.points+=3
+            }
+
+            if((this.finalPercentages<=90)&&(this.finalPercentages>80)){
+              this.results.points+=2.7
+            }
+
+            if((this.finalPercentages<=80)&&(this.finalPercentages>70)){
+              this.results.points+=2.4
+            }
+
+            if((this.finalPercentages<=70)&&(this.finalPercentages>60)){
+              this.results.points+=2.1
+            }
+
+            if((this.finalPercentages<=60)&&(this.finalPercentages>50)){
+              this.results.points+=1.8
+            }
+
+            if((this.finalPercentages<=50)&&(this.finalPercentages>40)){
+              this.results.points+=1.5
+            }
+
+            if((this.finalPercentages<=40)&&(this.finalPercentages>30)){
+              this.results.points+=1.2
+            }
+
+            this.itemAPI.reupdateUser(this.responseCopy[0].userr, this.results).subscribe((res)=>{
+              console.log(res)
+              })
+
           })
-          console.log(this.finalPercentages)
 
   }
-
   
   slide(){ 
     this.slides.slideNext();
@@ -1953,6 +1985,10 @@ if(this.resultados.length===5){
           break;
   
     }
+  }
+
+  goPrevious(){
+    this.navCtrl.back();
   }
 
 }

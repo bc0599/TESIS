@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pia-about-us',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PiaAboutUsPage implements OnInit {
 
-  constructor() { }
+  constructor( private navCtrl: NavController ) { }
 
   ngOnInit() {
   }
 
-}
+  go() {
+    this.navCtrl.back();
+    }
+
+  }
+

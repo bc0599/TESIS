@@ -2,7 +2,6 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { PiaItemsService } from '../piaitems/piaitems.service';
 import { FormBuilder } from "@angular/forms";
 import { Router } from '@angular/router';
-import {User} from '../../../Shared/user'
 
 @Component({
   selector: 'app-home',

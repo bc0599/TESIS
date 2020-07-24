@@ -2,10 +2,10 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { PiaItemsService } from './piaitems.service';
 import { ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
-import { FormGroup, FormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 import {cloneDeep} from 'lodash';
-import {User} from '../../../Shared/user'
+import {User} from '../../../Shared/user';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-piaitems',
@@ -16,7 +16,6 @@ import {User} from '../../../Shared/user'
 })
 
 export class PiaItemsPage implements OnInit {
-  userForm: FormGroup;
 
   @ViewChild('slides', {static: false}) slides: IonSlides;
 
@@ -33,10 +32,8 @@ export class PiaItemsPage implements OnInit {
 
   constructor(   
     private router: Router,
-    public fb: FormBuilder,
-    private zone: NgZone,
     private itemAPI: PiaItemsService,
-    public route: ActivatedRoute
+    private navCtrl: NavController
     ) {}
 
     ngOnInit(){
@@ -97,8 +94,15 @@ export class PiaItemsPage implements OnInit {
     this.user = {
       userr:this.us,
       result:[{
-        carrera:'',
-        puntuacion:0
+        career:null,
+        points:null,
+        coincidence_percentage:null,
+
+        coincidence_questions:[{
+      
+              item_id:null,
+              answer:null
+          }]
       }],
       user_items:[{
       item_id:this.Items[this.i].title,
@@ -121,7 +125,8 @@ export class PiaItemsPage implements OnInit {
       document.getElementById('itemsSlide').style.display = "none";
       document.getElementById('finishSlide').style.display = "block";
     }
-  }
+
+}
 
   //Aumenta el progreso en la barra de progreso
   increaseProgress(){
@@ -145,10 +150,14 @@ go(buttonId){
         break;
 
     case buttonId="button2":
-      this.router.navigate(['piapreresult'], { state: { userr: this.us } });
+      this.router.navigate(['piapreresult']);
         break;
 
   }
+}
+
+goPrevious(){
+  this.navCtrl.back();
 }
 
 }

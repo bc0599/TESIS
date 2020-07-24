@@ -2,9 +2,21 @@ const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 
 var resultados=new Schema({
+    
     _id:false,
-    carrera: {type:String},
-    puntaje:{type:Number}
+
+    career: {type:String},
+
+    points:{type:Number},
+
+    coincidence_percentage:{type:String},
+
+    coincidence_questions:[{
+
+        item_id:{type:String},
+        answer:{type:String}
+    }]
+
 })
 
 const users= new Schema({
@@ -21,7 +33,6 @@ const users= new Schema({
 
         answer:{type: String}
     }],
-
 
 },{collection:'users'
     })

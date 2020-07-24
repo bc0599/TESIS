@@ -34,6 +34,15 @@ export class PiaItemsService {
       );
   }
 
+  getFinalUser(userr): Observable<any> {
+    return this.http.get<User>('http://localhost:3000/Server/piaresult/'+ userr, this.httpOptions)
+      .pipe(
+        tap(_ => console.log('Users fetched!')),
+        catchError(this.handleError<User[]>('Get users'))
+        
+      );
+  }
+
   getComparison(carrera): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:3000/Server/piapreresult/'+ carrera, this.httpOptions)
       .pipe(
