@@ -63,7 +63,7 @@ export class PiaresultPage implements OnInit {
         break;
 
         default:
-          this.resultCardArray.push({career:'Indeterminado',img:'indeterminado-result', careerType:'', description:'Lo sentimos! Parece que las carreras que se evaluan en la presente prueba tienen una coincidencia indeterminada con respecto a tu perfil universitario.'},)
+          this.resultCardArray.push({career:'Indeterminado',img:'indeterminado-result', careerType:'', description:'Lo sentimos! Parece que las carreras que se evaluan en la presente prueba tienen una coincidencia indeterminada con respecto a tu perfil universitario. Sin embargo, ten en cuenta que en esta prueba se evaluan carreras relacionadas principalmente a las ciencias sociales, por lo tanto, existe la probabilidad de que tus cualidades no encajen con el estudio realizado para este test. Te recomendamos continuar con tu investigacion de forma metodica y exhaustiva puesto que los resultados que se proveen aqui no constituyen un factor definitorio en tu experiencia universitaria. '},)
           break;
       } 
 
