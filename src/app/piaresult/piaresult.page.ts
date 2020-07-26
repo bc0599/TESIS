@@ -63,7 +63,7 @@ export class PiaresultPage implements OnInit {
         break;
 
         default:
-          this.resultCardArray.push({career:'Indeterminado', careerType:'', description:'Lo sentimos! Parece que las carreras que se evaluan en la presente prueba tienen una coincidencia indeterminada con respecto a tu perfil universitario.'},)
+          this.resultCardArray.push({career:'Indeterminado',img:'indeterminado-result', careerType:'', description:'Lo sentimos! Parece que las carreras que se evaluan en la presente prueba tienen una coincidencia indeterminada con respecto a tu perfil universitario.'},)
           break;
       } 
 

@@ -1827,10 +1827,12 @@ this.partialResults= careersArray.filter(function (c) {
 
 //Se condiciona en caso de que el arreglo quede vacio luego de la filtracion 
 if(this.partialResults.length===0){
-  this.results={career:null,points:null,coincidence_percentage:null,coincidence_questions:null}
-}
+  this.results={career:"Indeterminado",points:null,coincidence_percentage:null,coincidence_questions:null}
 
-console.log(this.partialResults)
+  this.itemAPI.reupdateUser(this.responseCopy[0].userr, this.results).subscribe((res)=>{
+    console.log(res)
+    })
+}
 //Se efectua una copia profunda del arreglo resultante para guardado y extraccion de data 
 
 if(this.partialResults.length===1){
