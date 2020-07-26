@@ -45,10 +45,9 @@ export class PiaItemsPage implements OnInit {
       return confirmationMessage;    
          
   });
-    }
-  
-  ionViewDidEnter(){
 
+}
+ionViewWillEnter(){
   //Manejo de botones al empezar la encuesta
   document.getElementById("resultButton").style.display = "none";
   document.getElementById('finishSlide').style.display = "none";
@@ -156,8 +155,5 @@ go(buttonId){
   }
 }
 
-goPrevious(){
-  this.navCtrl.back();
-}
 
 }

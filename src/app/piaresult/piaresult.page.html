@@ -34,7 +34,7 @@
       <ion-col  size-md="12" size-sm="12" size-lg="12" id="Derecho">
   
         <ion-card *ngFor="let result of resultCardArray">
-          <img src="../../assets/img/derecho-result.jpg" />
+          <img src='{{ "../../assets/img/" + result.img + ".jpg" }}'/>
           <ion-card-header>
             <ion-card-subtitle>Ciencias Sociales</ion-card-subtitle>
             <ion-card-title>{{result.career}}</ion-card-title>

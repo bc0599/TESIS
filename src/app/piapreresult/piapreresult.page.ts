@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { PiaItemsService } from '../piaitems/piaitems.service';
@@ -14,7 +14,7 @@ import * as _ from 'lodash';
   styleUrls: ['./piapreresult.page.scss'],
   providers: [PiaItemsService]
 })
-export class PiaPreResultPage {
+export class PiaPreResultPage implements OnInit{
   results:Results;
   partialResults:any=[];
   progress:any=0;
@@ -38,6 +38,17 @@ export class PiaPreResultPage {
     private itemAPI: PiaItemsService,
     private navCtrl: NavController
   ) { }
+
+  ngOnInit(){
+    
+    //Previene al usuario de dejar o refrescar la pagina
+    window.addEventListener("beforeunload", function (e) {
+      var confirmationMessage = "\o/";
+      e.returnValue = confirmationMessage;  
+      return confirmationMessage;    
+         
+  });
+    }
 
   ionViewWillEnter() {
 
@@ -1985,10 +1996,6 @@ if(this.partialResults.length===5){
           break;
   
     }
-  }
-
-  goPrevious(){
-    this.navCtrl.back();
   }
 
 }
