@@ -1836,14 +1836,12 @@ if(this.partialResults.length===0){
 //Se efectua una copia profunda del arreglo resultante para guardado y extraccion de data 
 
 if(this.partialResults.length===1){
-
 this.compareUsers(this.partialResults[0].career, this.partialResults[0].points)
 }
 
 if(this.partialResults.length===2){
   for(let se=0;se<2;se++){
     this.compareUsers(this.partialResults[se].career, this.partialResults[se].points)
-    
       }
 }
 
@@ -1882,6 +1880,13 @@ if(this.partialResults.length===5){
         console.log('estas son las comparaciones'+ res1);
       
         this.compareCopy=cloneDeep(res1);
+
+        if(this.compareCopy.length===0){
+
+          this.results={career:partialResults,points:points,coincidence_percentage:null,coincidence_questions:null}
+
+          this.reUpdate(this.responseCopy[0].userr, this.results)
+        }else{
       
           //Se ordenan en orden ascendente los arreglos que reultan de la busqueda anterior
           for(let j=0; j<this.compareCopy.length; j++){
@@ -1969,10 +1974,18 @@ if(this.partialResults.length===5){
             this.itemAPI.reupdateUser(this.responseCopy[0].userr, this.results).subscribe((res)=>{
               console.log(res)
               })
-
+            }
           })
 
   }
+
+  reUpdate(user, results){
+    this.itemAPI.reupdateUser(user,results).subscribe((res)=>{
+      console.log(res)
+      })
+
+    }
+  
   
   slide(){ 
     this.slides.slideNext();

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 var resultados=new Schema({
     
-    _id:false,
+    "_id": false,
 
     career: {type:String},
 

@@ -31,7 +31,7 @@ itemRoute.route('/piaitems/:id').post((req, res) => {
 
 // Update user
 itemRoute.route('/piapreresult/:id').post((req, res) => {
-  userModel.findOneAndUpdate({userr:req.params.id} ,{$addToSet:{result:req.body}},{new: true, upsert: true, rawResult: true}, function (err, data) {
+  userModel.findOneAndUpdate({userr:req.params.id} ,{$addToSet:{result:req.body}},{new:true, upsert: true, rawResult: true}, function (err, data) {
       if (err){
         console.log(err)
       }else {
@@ -69,7 +69,7 @@ itemRoute.route('/piapreresult/:id').post((req, res) => {
 
 // Get users to compare to current user
 itemRoute.route('/piapreresult/:carrera').get((req, res) => {
-var query1= userModel.find({'result.carrera':req.params.carrera});
+var query1= userModel.find({'result.career':req.params.carrera});
 query1.exec(function (err, data) {
   if (err){
     console.log(err)
