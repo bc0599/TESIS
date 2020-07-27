@@ -45,9 +45,11 @@ export class PiaPreResultPage implements OnInit{
     window.addEventListener("beforeunload", function (e) {
       var confirmationMessage = "\o/";
       e.returnValue = confirmationMessage;  
-      return confirmationMessage;    
-         
+      return confirmationMessage;        
   });
+      // Manejo de botones y vistas
+      document.getElementById('ansButtons').style.display = "block";
+      document.getElementById('resultButton').style.display = "none";
     }
 
   ionViewWillEnter() {
@@ -1866,13 +1868,8 @@ if(this.partialResults.length===5){
       }
 }
 
-})
-
-    // Manejo de botones y vistas
-    document.getElementById('ansButtons').style.display = "block";
-    document.getElementById('resultButton').style.display = "none";
-
-  }
+  })
+}
 
   compareUsers(partialResults, points){
 
@@ -1971,10 +1968,11 @@ if(this.partialResults.length===5){
               this.results.points+=1.2
             }
 
+            }
             this.itemAPI.reupdateUser(this.responseCopy[0].userr, this.results).subscribe((res)=>{
               console.log(res)
               })
-            }
+
           })
 
   }
