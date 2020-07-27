@@ -38,19 +38,25 @@
           <img class="results-image responsive" src='{{ "../../assets/img/" + result.img + ".jpg" }}'/>
           </div>
           <ion-card-header>
-            <ion-card-subtitle>Ciencias Sociales</ion-card-subtitle>
-            <ion-card-title>{{result.career}}</ion-card-title>
+            <ion-card-subtitle color="primary" style="font-weight:bold;">Ciencias Sociales</ion-card-subtitle>
+            <ion-card-title style="color: black; font-weight:bold;">{{result.career}}</ion-card-title>
           </ion-card-header>
+
           <ion-card-content>
             <div class="ion-text-justify">
               {{result.description}}
             </div>
+            <br>
+            <ion-card-subtitle *ngIf="result.habilities!=null" color="tertiary" style="font-weight:bold;">Caracteristicas</ion-card-subtitle>
+            <br>
+            <div  *ngIf="result.habilities!=null" class="ion-text-justify">
+              {{result.habilities}}
+            </div>
+            <br>
           </ion-card-content>
+
         </ion-card>
     </ion-col>
-
-`
-  
     </ion-col>
     
     </ion-grid>`
