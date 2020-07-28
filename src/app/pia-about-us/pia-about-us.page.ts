@@ -14,8 +14,10 @@ export class PiaAboutUsPage implements OnInit {
   }
 
   go() {
+
     this.navCtrl.back();
-    }
+    
+  }
 
   }
 

@@ -13,6 +13,7 @@ result:[{
   coincidence_questions:[{
 
         item_id:string,
+        
         answer:string
     }]
 

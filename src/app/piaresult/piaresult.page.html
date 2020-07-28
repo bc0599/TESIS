@@ -1,6 +1,7 @@
 <ion-header>
 
   <ion-toolbar>
+
     <ion-title align="center" color="secondary" class="main-title1 span" >PIA</ion-title>
 
   </ion-toolbar>
@@ -10,18 +11,25 @@
 <ion-content>
 
   <ion-grid fixed>
+   
     <ion-row class="ion-justify-content-center">
     
       <ion-col size-lg="4" > 
+   
         <ion-button  (click)="go('button1')" class = "span" shape="block"  color="primary" style=" font-weight:bold;" >Carreras</ion-button>
+   
       </ion-col>
     
       <ion-col size-lg="4">
+   
         <ion-button (click)="go('button2')" class = "span" shape="block" color="secondary" style=" font-weight:bold;">Sobre nosotros</ion-button>
+   
       </ion-col>
     
       <ion-col size-lg="4">
+   
         <ion-button  (click)="go('button3')" style=" font-weight:bold;" class = "span "  shape="block" color="tertiary" >Reiniciar test</ion-button>
+   
       </ion-col>
     
     </ion-row>
@@ -31,37 +39,59 @@
   <ion-grid fixed>
 
     <ion-col  class="ion-justify-content-center">
+      
       <ion-col  size-md="12" size-sm="12" size-lg="12" id="Derecho">
   
         <ion-card *ngFor="let result of resultCardArray">
+      
           <div align="center">
-          <img class="results-image responsive" src='{{ "../../assets/img/" + result.img + ".jpg" }}'/>
+      
+            <img class="results-image responsive" src='{{ "../../assets/img/" + result.img + ".jpg" }}'/>
+
           </div>
+      
           <ion-card-header>
+            
             <ion-card-subtitle color="primary" style="font-weight:bold;">Ciencias Sociales</ion-card-subtitle>
+            
             <ion-card-title style="color: black; font-weight:bold;">{{result.career}}</ion-card-title>
+          
           </ion-card-header>
 
           <ion-card-content>
+            
             <div class="ion-text-justify">
+            
               {{result.description}}
+            
             </div>
+            
             <br>
+            
             <ion-card-subtitle *ngIf="result.habilities!=null" color="tertiary" style="font-weight:bold;">Caracteristicas</ion-card-subtitle>
+            
             <br>
+            
             <div  *ngIf="result.habilities!=null" class="ion-text-justify">
+            
               {{result.habilities}}
+            
             </div>
+            
             <br>
+          
           </ion-card-content>
 
         </ion-card>
-    </ion-col>
+    
+      </ion-col>
+    
     </ion-col>
     
-    </ion-grid>`
+    </ion-grid>
   
   <div class="ion-padding-bottom"></div>
+  
   <div class="ion-padding-bottom"></div>
 
 </ion-content>

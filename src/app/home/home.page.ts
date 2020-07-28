@@ -14,8 +14,11 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit{
 
   constructor( private router: Router,
+    
     public fb: FormBuilder,
+    
     private zone: NgZone,
+    
     private itemAPI: PiaItemsService) {}
     
   ngOnInit(): void {
@@ -27,20 +30,28 @@ export class HomePage implements OnInit{
     switch (buttonId) {
 
       case buttonId="button1":
-        this.router.navigate(['pia-careers']);
-          break;
+        
+      this.router.navigate(['pia-careers']);
+      
+      break;
 
       case buttonId="button2":
-        this.router.navigate(['pia-about-us']);
-          break;
+      
+      this.router.navigate(['pia-about-us']);
+      
+      break;
 
       case buttonId="button3":
-        this.router.navigate(['piaitems']);
-          break;
+      
+      this.router.navigate(['piaitems']);
+      
+      break;
 
      case buttonId="button4":
-        this.router.navigate(['piaitems']);
-          break;
+       
+     this.router.navigate(['piaitems']);
+     
+     break;
 
     }
   }

@@ -14,6 +14,7 @@ var resultados=new Schema({
     coincidence_questions:[{
 
         item_id:{type:String},
+        
         answer:{type:String}
     }]
 

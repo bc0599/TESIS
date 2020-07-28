@@ -9,6 +9,7 @@ export class Results{
   coincidence_questions:[{
 
         item_id:string,
+        
         answer:string
     }]
 

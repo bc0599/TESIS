@@ -14,7 +14,9 @@ export class PiaCareersPage implements OnInit {
   }
 
   go() {
+
     this.navCtrl.back();
-    }
+    
+  }
 
 }
